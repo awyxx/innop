@@ -1,0 +1,122 @@
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Roboto:wght@400;500&display=swap);
+
+head, body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0%;
+}
+
+
+
+/*     Navigation Bar     */
+
+.navigation{
+    background-color:white;
+    height:15%;
+    width: 100%;
+    text-align: center;
+  }
+  .references{
+    background-color:white;
+    width: 8%;
+    float: left;
+    color:  #17c;
+    display: center;
+    padding: 31;
+    font-size: 30;
+    border-radius:5%;
+  }
+  .references:hover{
+    background-color: #17c;
+    color: white;
+  }
+  .logo{
+    background-color:white;
+    height:15%;
+    width: 15%;
+    padding: 41;
+    float: left;
+  }
+  .logo img{
+    margin-top: -42px;
+    margin-left: -20px;
+  }
+.infoprof{
+  float:right;
+  width: 30%;
+  height: 100%;
+  background-color:#17c;
+}
+.esquerda{
+  float: left;
+  width: 80%;
+}
+.direita{
+  float: left;
+  width: 20%;
+}
+.imagem{
+  border: 2px solid white;
+  margin: 3px;
+  height: 88px;
+  width: 88px;
+  float: right;
+}
+
+  /*     Footer     */
+
+.footerup{
+  background-color: rgb(0,0,0);
+  height: 40%;
+  width: 100%;
+  color:white;
+}
+.footerup .links a{
+  text-decoration: none;
+}
+.footerdown{
+  background-color: rgb(28,28,28);
+  height: 10%;
+  width: 100%;
+  color:white;
+}
+.fimagens{
+  float: left;
+  background-color:black;
+  margin-left: 40px;
+}
+.footerup a:hover{
+  color:#17c;
+}
+.footerup a{
+  color:white;
+  text-decoration: none;
+}
+.link{
+  margin-top: 3px;
+}
+.footerlinha{
+  width: 6%;
+  color:black;
+  float: left;
+  
+}
+.footerlinha hr{
+  width: 0.1;
+  height:100px;
+  margin-left: 4%;
+}
+
+
+
+
+/* Index */
+
+.esq{
+  
+  background-color: green;
+  height: 50%;
+  width: 20%;
+  margin-top: 20px;
+  margin-left: 45px;
+}
+
