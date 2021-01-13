@@ -12,11 +12,14 @@
         <div class="logo">
             <img src="imagens/innoplus_icon.png" height="100px">
         </div>
-        <div class="references">
-            Teste2
+        <div class="inicial active">
+          Página Inicial
         </div>
         <div class="references">
-            Teste2
+            Sumários
+        </div>
+        <div class="references">
+            Faltas
         </div>
 
 

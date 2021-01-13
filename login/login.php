@@ -1,4 +1,5 @@
 <html>
+
 <head>
     <meta charset='UTF-8'>
     <link rel="stylesheet" href="login.css">
@@ -22,41 +23,24 @@ Coding style em .php :
 |*******************|
 */
 
-// dados incorretos
-function login_incorreto() {
+// funcao erro q passa oq aconteceu por argumento
+function erro($error_text) {
     printf("
     <div class='center'>
         <center>  
         <img src='../imagens/error.png' width=312 height=312> </img> 
-        <h2> Dados incorretos! </h2> 
-        <a href='formlogin.php'> <button class='button' type='button'> Tentar novamente </button> </a>
-        </center> 
-    </div>
-    </body> </html>
-    ");
-    exit;
-}
-
-// algo de estranho aconteceu
-function estranho() {
-    printf("
-    <div class='center'>
-        <center>  
-        <img src='../imagens/error.png' width=312 height=312> </img> 
-        <h2> Oops! Algo de estranho aconteceu :( </h2> 
+        <h2> %s </h2> 
         <a href='formlogin.php'> <button class='button' type='button'> Voltar </button> </a>
         </center> 
     </div>
     </body> </html>
-    ");
+    ", $error_text);
     exit;
 }
 
 // guardar session com todos os dados basicamente
 function guardar_dados($result) {
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-
-    session_start();
 
     $_SESSION["codprof"]        = $row["codprof"];
     $_SESSION["nome"]           = $row["nome"];
@@ -74,14 +58,22 @@ function guardar_dados($result) {
 |****************|
 */
 
-// verificar se o post ja foi enviado ou se temos sessao...
-if (!isset($_POST["login_post"]) || !isset($_SESSION["codprof"]))
-    estranho();
+
+// verificar se temos sessao, se sim, bazar
+session_start();
+if (isset($_SESSION["codprof"])) {
+    header("Location: ../index.php");
+    exit;
+}
+
+// verificar se o post ja foi enviado 
+if (!isset($_POST["login_post"]))
+    erro("Oops! Algo de estranho aconteceu :(");
 
 // conectar a base de dados
 if (!($con = mysqli_connect("localhost", "root", "", "innoplus"))) {
-    printf("Conexão falhada! %s : %s", mysqli_connect_errno(), mysqli_connect_error());
-    estranho();
+    $erro_conexao = "Conexão falhada! <br> ".mysqli_connect_errno().": ".mysqli_connect_error();
+    erro($erro_conexao);
 }
 
 // n processo e cartao cid
@@ -96,7 +88,7 @@ $valido = mysqli_num_rows($result);
 // se usuario nao existir
 if (!$valido) {
     mysqli_close($con);
-    login_incorreto();    
+    erro("Dados incorretos!");
 }
 
 // guardar sessao

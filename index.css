@@ -17,15 +17,34 @@ head, body {
   }
   .references{
     background-color:white;
-    width: 8%;
+    width: 7%;
     float: left;
     color:  #17c;
     display: center;
-    padding: 31;
-    font-size: 30;
+    padding: 36;
+    font-size: 22;
     border-radius:5%;
+    margin-top: 15px;
+    line-height: 15%;
+  }
+  .inicial{
+    background-color:white;
+    width: 10%;
+    float: left;
+    color:  #17c;
+    display: center;
+    padding: 36;
+    font-size: 22;
+    border-radius:5%;
+    margin-top: 15px;
+    line-height: 10%;
+
   }
   .references:hover{
+    background-color: #17c;
+    color: white;
+  }
+  .inicial:hover{
     background-color: #17c;
     color: white;
   }
@@ -45,6 +64,7 @@ head, body {
   width: 30%;
   height: 100%;
   background-color:#17c;
+  border-radius: 25px 0px 0px 25px;
 }
 .esquerda{
   float: left;
@@ -105,18 +125,105 @@ head, body {
   height:100px;
   margin-left: 4%;
 }
-
+.active{
+  background-color: lightblue;
+}
 
 
 
 /* Index */
-
+.corpo{
+  background-image: url("imagens/login_background.jpg");
+  height: 200%;
+  width: 100%;
+}
 .esq{
-  
-  background-color: green;
-  height: 50%;
+  float: left;
+  background-color: white;
+  height: 300px;
   width: 20%;
   margin-top: 20px;
   margin-left: 45px;
+  border: 1px solid #17c;
 }
-
+.esqbdireito{
+  float: left;
+  background-color: white;
+  height: 300px;
+  width: 20%;
+  margin-top: 20px;
+  margin-left: 45px;
+  border: 1px solid #17c;
+  border-radius: 0px 0px 0px 25px;
+}
+.esqcdireito{
+  float: left;
+  background-color: white;
+  height: 300px;
+  width: 20%;
+  margin-top: 20px;
+  margin-left: 45px;
+  border: 1px solid #17c;
+  border-radius: 25px 0px 0px 0px;
+}
+.horario{
+  float: right;
+  background-color: white;
+  height: 600px;
+  width: 70%;
+  margin-top: 20px;
+  margin-right: 45px;
+  border: 1px solid #17c;
+  border-radius: 0px 25px 0px 0px;
+}
+.tab{
+  background-color: #17c;
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  color: white;
+  line-height:50px;
+}
+.tabcdireito{
+  background-color: #17c;
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  color: white;
+  line-height:50px;
+  border-radius: 23px 0px 0px 0px;
+}
+.tabhorario{
+  background-color: #17c;
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  color: white;
+  line-height:50px;
+  border-radius: 0px 23px 0px 0px;
+}
+.desc{
+  height: 100%;
+  width: 100%;
+}
+.descdireito{
+  height: 100%;
+  width: 100%;
+  border-radius: 0px 20px 0px 0px;
+}
+.informacao{
+  float: right;
+  background-color: white;
+  height: 322px;
+  width: 70%;
+  margin-top: 20px;
+  margin-right: 45px;
+  border: 1px solid #17c;
+  border-radius: 0px 0px 25px 0px;
+}
+.infocontainer{
+  width: 90%;
+  height: 28%;
+  background-color: black;
+  float: left;
+}
