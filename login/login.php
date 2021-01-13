@@ -39,7 +39,7 @@ function erro($error_text) {
 }
 
 // guardar session com todos os dados basicamente
-function guardar_dados($result) {
+function guardar_dados_sessao($result) {
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
     $_SESSION["codprof"]        = $row["codprof"];
@@ -49,6 +49,11 @@ function guardar_dados($result) {
     $_SESSION["nacionalidade"]  = $row["nacionalidade"];
     $_SESSION["telemovel"]      = $row["telemovel"];
     $_SESSION["email"]          = $row["email"];
+    $_SESSION["codcartao"]      = $row["codcartao"]; // mesma coisa que codprof!
+    $_SESSION["status"]         = $row["status"];
+    $_SESSION["saldo"]          = $row["saldo"];
+    $_SESSION["img"]            = $row["img"];
+
 }
 
 
@@ -57,7 +62,6 @@ function guardar_dados($result) {
 |*      MAIN    *|
 |****************|
 */
-
 
 // verificar se temos sessao, se sim, bazar
 session_start();
@@ -81,7 +85,7 @@ $np = $_POST["np"];
 $cc = $_POST["cc"];
 
 // nao falhar na query pls xd
-$query  = "SELECT * FROM professor WHERE cc = $cc AND codprof = $np"; 
+$query = "SELECT * FROM professor INNER JOIN cartao ON codprof = codcartao WHERE cc = 1 AND codprof = 1";
 $result = mysqli_query($con, $query);
 $valido = mysqli_num_rows($result);
 
@@ -92,11 +96,11 @@ if (!$valido) {
 }
 
 // guardar sessao
-guardar_dados($result);
+guardar_dados_sessao($result);
 mysqli_free_result($result);
 // se o usuario existir, damos welcome e abrimos-lhe outra pagina
-// welcome
-//header("Location: ../index.php");
+// welcome, gif, sleep, ...?
+header("Location: ../index.php");
 exit;
 
 ?> 

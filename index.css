@@ -134,7 +134,7 @@ head, body {
 /* Index */
 .corpo{
   background-image: url("imagens/login_background.jpg");
-  height: 200%;
+  height: 160%;
   width: 100%;
 }
 .esq{
@@ -223,7 +223,9 @@ head, body {
 }
 .infocontainer{
   width: 90%;
-  height: 28%;
-  background-color: black;
+  height: 22%;
+  background-color: rgb(226, 226, 226);
   float: left;
+  margin-top: 12px;
+  margin-left: 12px;
 }

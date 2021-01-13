@@ -9,7 +9,6 @@
 
 <body>
 
-
 <?php include "navbar.php"; 
 session_start();
 if (!isset($_SESSION["codprof"])) { 
@@ -17,7 +16,6 @@ if (!isset($_SESSION["codprof"])) {
     exit; 
 }
 ?>
-
 
 
 <div class="corpo">
@@ -33,16 +31,18 @@ if (!isset($_SESSION["codprof"])) {
                 <div class="infocontainer">
                     1Teste
                 </div>
+                
                 <div class="infocontainer">
                     1Teste
                 </div>
+                
                 <div class="infocontainer">
                     1Teste
                 </div>
 
 
 
-s
+
 
             </div>
         </div>
