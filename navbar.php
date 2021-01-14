@@ -13,7 +13,7 @@
     <?php
 
     // tirar os warnings / erros !!! IMPORTANTE !!!!
-    //error_reporting(0);
+    error_reporting(0);
 
     // se nao dermos start nao da p usar $_SEssion mas isto da erro na mesma, fix l8r
     session_start(); 
@@ -55,14 +55,29 @@
             <?php 
 
             // dados do stor (canto superior direito)
-            printf("CodCartao: %s <br> 
-                    Nome: %s <br>
-                    Status: %s <br> 
-                    Saldo: %s <br>", 
+            printf("
+                    <table>
+
+                        <tr>
+                            <td> CodCartao:  </td> <td> <b> &emsp; %s </b> </td>
+                        </tr>
+                        <tr>
+                            <td> Nome:  </td> <td> <b> &emsp; Nelson Filipe Cerqueira Antunes </b> </td>
+                        </tr>
+                        <tr>
+                            <td> Status:  </td> <td> <b> &emsp; %s </b> </td>
+                        </tr>
+                        <tr>
+                            <td> Saldo:  </td> <td> <b> &emsp; %s </b> </td>
+                        </tr>
+
+                    </table>",
+
                     $_SESSION["codcartao"], $_SESSION["nome"], $_SESSION["status"], $_SESSION["saldo"]);
             
+        
             ?>
-            <a href="logout.php"> ghost </a>
+            <a href="logout.php"><img src="imagens/logout.png" width="30px" height="30px" legend="Encerrar Sessão"></a>
         </div>
         <div class="direita">
             <div class="imagem"> <?php echo '<img height=88px width=88px src="data:image/jpeg;base64,'.base64_encode( $_SESSION['img'] ).'"/>'; ?> </div>
