@@ -22,21 +22,21 @@
     function menu_pag_ativa() {
         switch(basename($_SERVER["PHP_SELF"])) {
             case "index.php": {
-                printf("<a href='index.php'> <div class='inicial  active'> Página Inicial </div> </a>
+                printf("<a href='index.php'> <div class='inicial  active'> <b> Página Inicial </b> </div> </a>
                         <a href='sumarios.php'> <div class='references'> Sumários </div> </a>
                         <a href='faltas.php'> <div class='references'> Faltas </div> </a> ");
                 break;
             }
             case "sumarios.php": {
-                printf("<a href='index.php'> <div class='inicial'> Página Inicial </div> </a>
-                        <a href='sumarios.php'> <div class='references active'> Sumários </div> </a>
+                printf("<a href='index.php'> <div class='inicial'> Página Inicial </div> </a> 
+                        <a href='sumarios.php'> <div class='references active'> <b> Sumários </b> </div> </a>
                         <a href='faltas.php'> <div class='references'> Faltas </div> </a> ");
                 break;
             }
             case "faltas.php": {
                 printf("<a href='index.php'> <div class='inicial'> Página Inicial </div> </a>
                         <a href='sumarios.php'> <div class='references'> Sumários </div> </a>
-                        <a href='faltas.php'> <div class='references  active'> Faltas </div> </a> ");
+                        <a href='faltas.php'> <div class='references  active'> <b> Faltas </b> </div> </a> ");
                 break;
             }
         }
@@ -62,7 +62,7 @@
                             <td> CodCartao:  </td> <td> <b> &emsp; %s </b> </td>
                         </tr>
                         <tr>
-                            <td> Nome:  </td> <td> <b> &emsp; Nelson Filipe Cerqueira Antunes </b> </td>
+                            <td> Nome:  </td> <td> <b> &emsp; %s </b> </td>
                         </tr>
                         <tr>
                             <td> Status:  </td> <td> <b> &emsp; %s </b> </td>

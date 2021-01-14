@@ -17,7 +17,6 @@ if (!isset($_SESSION["codprof"])) {
 }
 ?>
 
-
 <div class="corpo">
  
 <br><br>

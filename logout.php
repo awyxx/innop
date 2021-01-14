@@ -4,7 +4,7 @@
 session_start();
 session_unset();
 session_destroy(); 
-
-//header("Location: login/formlogin.php")
+//session_abort();
+header("Location: login/formlogin.php")
 
 ?>
