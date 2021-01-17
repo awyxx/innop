@@ -86,6 +86,7 @@ $cc = $_POST["cc"];
 
 // nao falhar na query pls xd
 $query = "SELECT * FROM professor INNER JOIN cartao ON codprof = codcartao WHERE cc = $cc AND codprof = $np";
+//$query = "SELECT * FROM aluno INNER JOIN cartao ON codaluno = codcartao WHERE cc = $cc AND codaluno = $np";
 $result = mysqli_query($con, $query);
 $valido = mysqli_num_rows($result);
 

@@ -4,12 +4,13 @@
 
     <meta charset="UTF-8">
     <link rel="stylesheet" href="index.css">
+
     
 </head>
 
 <body>
 
-<?php include "navbar.php"; 
+<?php include "navbar.php";
 session_start();
 if (!isset($_SESSION["codprof"])) { 
     header("Location: login/formlogin.php"); 
@@ -28,15 +29,41 @@ if (!isset($_SESSION["codprof"])) {
             <div class="desc">
                 
                 <div class="infocontainer">
-                    1Teste
+
+                    <?php
+
+                    printf("
+                    <b> &emsp; Email: </b> &emsp;   %s 
+                    ",
+                    
+                    $_SESSION['email']);
+                    
+                    ?>
+
                 </div>
                 
                 <div class="infocontainer">
-                    1Teste
+                <?php
+
+                    printf("
+                    <b> &emsp; Telemovel: </b> &emsp;   %s 
+                    ",
+
+                    $_SESSION['telemovel']);
+
+                    ?>
+
                 </div>
                 
                 <div class="infocontainer">
-                    1Teste
+
+                    <?php
+                    include "funcoes.php";
+
+                    printf("<b> &emsp; Nacionalidade: </b> &emsp;" ); nacionalidade($_SESSION['nacionalidade']);
+                    //echo $_SESSION["nacionalidade"];
+                    ?>
+
                 </div>
 
 
