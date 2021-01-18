@@ -244,8 +244,52 @@ head, body {
   float: left;
   margin-top: 12px;
   margin-left: 12px;
-  line-height: 65px;
+  line-height: 450%; /* 65px */
   border-radius: 10%;
   font-size: 15;
   
+}
+
+
+
+.horariotabela{
+  background: #c2cadd;
+	border-collapse:separated;
+	margin:5px; 
+	border:5px solid #17c;
+	table-layout: auto;
+  display: table;
+  width: 98.9%;
+  text-align: center;
+  height: 90%;
+  font-size: 12;
+  border-collapse: collapse;
+}
+.horariotabela td{
+  
+  
+  border: 0.5px solid white;
+}
+.tit{
+  background-color: rgb(32, 124, 178);
+  color: white;
+  font-size: 16;
+}
+.hora{
+  width: 6%;
+  font-size: 12;
+  color:rgb(11, 33, 51);
+  font-weight: bold;
+  color: white;
+  background-color: rgb(32, 124, 178) ;
+}
+.espaco{
+  width: 10px;
+}
+.almoco{
+  color: white;
+  background: repeating-linear-gradient( -45deg,
+  #60aabc,  #60aabc 10px,
+  #468198 10px, #468198 20px       );
+  font-size: 16;
 }

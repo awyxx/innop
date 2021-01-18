@@ -68,7 +68,7 @@
                             <td> Status:  </td> <td> <b> &emsp; %s </b> </td>
                         </tr>
                         <tr>
-                            <td> Saldo:  </td> <td> <b> &emsp; %s </b> </td>
+                            <td> Saldo:  </td> <td> <b> &emsp; %s € </b> </td>
                         </tr>
 
                     </table>",
