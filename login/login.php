@@ -74,11 +74,8 @@ if (isset($_SESSION["codprof"])) {
 if (!isset($_POST["login_post"]))
     erro("Oops! Algo de estranho aconteceu :(");
 
-// conectar a base de dados
-if (!($con = mysqli_connect("localhost", "root", "", "innoplus"))) {
-    $erro_conexao = "Conexão falhada! <br> ".mysqli_connect_errno().": ".mysqli_connect_error();
-    erro($erro_conexao);
-}
+// conectar à base de dados
+include("connect_db.php");
 
 // n processo e cartao cid
 $np = $_POST["np"];
