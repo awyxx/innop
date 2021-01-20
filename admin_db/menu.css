@@ -1,0 +1,50 @@
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Roboto:wght@400;500&display=swap);
+
+head, body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0%;
+  background-image: url(../imagens/login_background.jpg);
+}
+
+/*
+    Header
+*/
+
+.logo{
+    background-color: #17a;
+    width: 100%;
+    height: 20%;
+    text-align: center;
+}
+.logo img{
+    height: 95%;
+}
+
+
+/*
+    Select
+*/
+
+.select_css{
+    background-color:transparent;
+    border: 2px solid white;
+    border-radius: 25%;
+    color: white;
+}
+.select_css :focus{
+    border-radius: 25%;
+}
+.select_css option{
+    background-color: rgb(60, 71, 75);
+}
+.select_css::selection{
+    background-color: #17a;
+}
+
+/*
+    Form
+*/
+
+.form_css{
+    color: white;
+}

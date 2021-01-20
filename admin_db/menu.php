@@ -2,6 +2,7 @@
 
 <head>
     <meta charset='UTF-8'>
+    <link rel="stylesheet" href="menu.css">
     <style>
     table, th, td {
         border: 1px solid black;
@@ -64,6 +65,11 @@
 </head>
 
 <body>
+
+    <div class="logo">
+        <img src="../imagens/innoplus_icon_branco.png">
+    </div>
+
 
 <?php
 
@@ -157,10 +163,11 @@ function campos_tabela($tabela, $con) {
 
 session_start();
 include("../connect_db.php");
-
 // form + select menu com as tabelas!
-printf("<form method='post'> Tabela: ");
-    printf("<select name='tabela' onchange='this.form.submit()'>");
+printf("<center>");                                                             // tag center
+printf("<br>");
+printf("<form class='form_css' method='post'> Tabela: ");
+    printf("<select class='select_css' name='tabela' onchange='this.form.submit()'>");
         $query  = "SHOW TABLES FROM innoplus";
         $result = mysqli_query($con, $query);
         printf("<option selected disabled hidden> Escolher... </option>");
@@ -168,7 +175,7 @@ printf("<form method='post'> Tabela: ");
             printf("<option> %s </option>", $row[0]);
     printf("</select>");    
 printf("</form>");
-
+printf("</center>");                                                            // tag center
 
 /******* */
 /* POSTS */
