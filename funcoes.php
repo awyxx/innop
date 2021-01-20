@@ -1,5 +1,3 @@
-<html>
-<body>
 <?php
 
 function nacionalidade($abreviatura) {
@@ -23,6 +21,3 @@ function nacionalidade($abreviatura) {
 
 
 ?>
-
-</body>
-</html>

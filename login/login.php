@@ -75,7 +75,7 @@ if (!isset($_POST["login_post"]))
     erro("Oops! Algo de estranho aconteceu :(");
 
 // conectar à base de dados
-include("connect_db.php");
+include("../connect_db.php");
 
 // n processo e cartao cid
 $np = $_POST["np"];
