@@ -66,8 +66,10 @@ int numero_campos_mysql(MYSQL* con, const char* tabela)
 
     int ncampos = 0;
     MYSQL_ROW* campo;
-    while (campo = (MYSQL_ROW*)mysql_fetch_row(result)) {
-        if (!strcmp((char*)campo[0], "Imagem") || !strcmp((char*)campo[0], "img"))
+    while (campo = (MYSQL_ROW*)mysql_fetch_row(result))
+    {
+        if (!strcmp((char*)campo[0], "Imagem")
+            || !strcmp((char*)campo[0], "img"))
             continue;
         ncampos++;
     }
@@ -75,7 +77,9 @@ int numero_campos_mysql(MYSQL* con, const char* tabela)
     return ncampos;
 }
 
-void pedir_campos_mysql(MYSQL* con, const char* tabela, char registo[16][128])
+void pedir_campos_mysql(MYSQL* con,
+                        const char* tabela,
+                        char registo[16][128])
 {
     tentativa("pedir_campos_mysql(%p, %s)", con, tabela);
 
@@ -92,13 +96,13 @@ void pedir_campos_mysql(MYSQL* con, const char* tabela, char registo[16][128])
     MYSQL_ROW* campo;
     while (campo = (MYSQL_ROW*)mysql_fetch_row(result))
     {
-        if (!strcmp((char*)campo[0], "Imagem") || !strcmp((char*)campo[0], "img"))
+        if (!strcmp((char*)campo[0], "Imagem")
+            || !strcmp((char*)campo[0], "img"))
             continue;
         printf("%s: ", campo[0]);
         scanf("%s", registo[x]);
         x++;
     }
-
 }
 void mostrar_campos_mysql(MYSQL* con, const char* tabela)
 {
@@ -188,7 +192,9 @@ void listar_uma_mysql(MYSQL* con, const char* nometabela)
             if (i == 0)
             {
                 while (field = mysql_fetch_field(result))
+                {
                     printf("%s ", field->name);
+                }
 
                 printf("\n");
                 for (int i = 0; i < 84; i++)
@@ -303,7 +309,8 @@ bool tabela_existe(MYSQL* con, const char* db, const char* nometabela)
     int valid    = 0;
     for (int i = 0; i < ntabelas; i++)
     {
-        if (!strcmp(tabelas[i], nometabela)) {
+        if (!strcmp(tabelas[i], nometabela))
+        {
             sucesso("tabela_existe() -> Tabela existe!");
             valid++;
         }
@@ -325,7 +332,8 @@ int tabela_num(MYSQL* con, const char* db, const char* nometabela)
     int valid = 0, num_tabela = -1;
     for (int i = 0; i < ntabelas; i++)
     {
-        if (!strcmp(tabelas[i], nometabela)) {
+        if (!strcmp(tabelas[i], nometabela))
+        {
             sucesso("tabela_num() -> Index da tabela valido!");
             return i;
         }

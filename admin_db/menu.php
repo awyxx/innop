@@ -66,9 +66,9 @@
 
 <body>
 
-    <div class="logo">
-        <img src="../imagens/innoplus_icon_branco.png">
-    </div>
+    <center>
+        <img class="logo" src="../imagens/innoplus_icon_branco.png">
+    </center>
 
 
 <?php
@@ -112,10 +112,10 @@ function tabela_registos($tabela, $db) {
 
 // coluna acao com select menu modificar e remover 
 function menu_acao($x) {
-    printf("<td>");
+    printf("<td class='centrar'>");
     printf("
-    <form method='post'>
-        <select id='%d' onchange='buscar_valores_linha(this)'>
+    <form class='formmod' method='post'>
+        <select class='modselect_css' id='%d' onchange='buscar_valores_linha(this)'>
             <option disabled hidden selected>  </option> 
             <option> Modificar </option> 
             <option> Remover </option> 
@@ -166,7 +166,7 @@ include("../connect_db.php");
 // form + select menu com as tabelas!
 printf("<center>");                                                             // tag center
 printf("<br>");
-printf("<form class='form_css' method='post'> Tabela: ");
+printf("<form class='form_css' method='post'>");
     printf("<select class='select_css' name='tabela' onchange='this.form.submit()'>");
         $query  = "SHOW TABLES FROM innoplus";
         $result = mysqli_query($con, $query);
@@ -192,11 +192,11 @@ if (isset($_POST["tabela"])) {
     $_SESSION["tabela"] = $tabela_ativa;
     printf("<h1> Tabela %s </h1>", $tabela_ativa);
 
-    printf("<table name='table1'>");
+    printf("<table class='tabela' name='table1'>");
         tabela_campos($tabela_ativa, $con);
         tabela_registos($tabela_ativa, $con);
-        printf("<tr> <td> <form method='post'> 
-        <input name='inserir_post' type='submit' value='+'> 
+        printf("<tr class='limite'> <td colspan='10'> <form method='post'> 
+        <input class='inseriri_but' name='inserir_post' type='submit' value='Inserir Registo'>
                 </form> </td> </tr>");
     printf("</table>");
 }
@@ -337,7 +337,8 @@ if (isset($_POST["ins_post_mysql"])) {
     else {
         printf("Registo introduzido com sucesso!");
     }
-    printf("<a href='menu.php'> Voltar </a> "); // transformar em botao
+    // printf("<a href='menu.php'> Voltar </a> "); // transformar em botao
+    printf(" <a href=«menu.php'> <button class='button' type='button'> Voltar </button> </a> ");
 }
 
 ?>

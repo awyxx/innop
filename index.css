@@ -3,6 +3,8 @@
 head, body {
   font-family: 'Roboto', sans-serif;
   margin: 0%;
+  height: 100vh;
+  width: 100vw;
 }
 
 
@@ -11,35 +13,35 @@ head, body {
 
 .navigation{
     background-color:white;
-    height:15%;
-    width: 100%;
+    height:15vh;
+    width: 100vw;
     text-align: center;
-    margin-bottom: 10px;
-    margin-top: 10px;
-  }
+    margin-bottom: 0.4vh;
+    margin-top: 0.4vh;
+}
   .references{
     background-color:white;
-    width: 7%;
+    width: 7vw;
     float: left;
     color:  #17c;
     display: center;
-    padding: 36;
-    font-size: 22;
-    border-radius:5%;
-    margin-top: 15px;
-    line-height: 15%;
+    padding: 2.3vw; /* pag inicial sumarios faltas */
+    font-size: 1.7vw; /* pagina inicial , sumarios, faltas */ 
+    border-radius: 5%;
+    margin-top: 1vw;
+    line-height: 0.5vh;
   }
   .inicial{
     background-color:white;
-    width: 10%;
+    width: 10vw;
     float: left;
     color:  #17c;
     display: center;
-    padding: 36;
-    font-size: 22;
-    border-radius:5%;
-    margin-top: 15px;
-    line-height: 10%;
+    padding: 2.3vw;
+    font-size: 1.5vw;
+    border-radius: 5%;
+    margin-top: 1vw;
+    line-height: 0.5vh;
 
   }
   .references:hover{
@@ -52,49 +54,54 @@ head, body {
   }
   .logo{
     background-color:white;
-    height:15%;
-    width: 15%;
-    padding: 41;
+    height: 2vh;
+    width: 15vw;
+    padding: 3vw;
     float: left;
   }
   .logo img{
-    margin-top: -42px;
-    margin-left: -20px;
+    margin-top: -4vh;
+    margin-left: -6vh;
   }
-.infoprof{
+
+.infoprof{ /* quadrado com info e a foto */
   color:white;
   float:right;
-  width: 37%;
-  height: 100%;
+  width: 37vw;
+  height: 14vh;
   background-color:#17c;
-  border-radius: 25px 0px 0px 25px;
+  border-radius: 25px 0px 0px 25px; /* nao meter em %! isto é suposto estar em px */
+  margin-right: 0.9% ;
 }
 .esquerda{
   float: left;
-  width: 80%;
+  width: 79%;
   text-align: justify;
 }
-.esquerda img{
-  margin-top: 10px;
+.esquerda img{ /* imagem para sair (porta logout) */
+  margin-top: 1vh;
   float: right;
 }
-.esquerda table{
-  margin-left: 20px;
-  margin-bottom: -40px;
+.esquerda table{ /* cod cartao e isso tudo */ 
+  margin-left: 4.5%;
+  margin-bottom: -9.5%; /*so aplica À imagem da porta? */
   color: white;
+  font-size: 1vw;
+  height: 13vh;
 }
-.esquerda b{
-  color: black;
+
+.esquerda b{ /*cor da fonte com os dados */
+  color: black; 
 }
-.direita{
+.direita{ /* imagem? */
   float: left;
   width: 20%;
 }
-.imagem{
+.imagem{ /* imagem tmb */
   border: 2px solid white;
-  margin: 3px;
-  height: 88px;
-  width: 88px;
+  margin: 3%;
+  height: 82%;
+  width: 79%;
   float: right;
 }
 
@@ -115,10 +122,10 @@ head, body {
   width: 100%;
   color:white;
 }
-.fimagens{
+.fimagens{ /* imagens do footer (poch etc) */
   float: left;
   background-color:black;
-  margin-left: 40px;
+  margin-left: 3.5%;
 }
 .footerup a:hover{
   color:#17c;
@@ -128,7 +135,7 @@ head, body {
   text-decoration: none;
 }
 .link{
-  margin-top: 3px;
+  margin-top: 0.4%; /* contactos suporte etc (footer) */
 }
 .footerlinha{
   width: 6%;
@@ -136,9 +143,9 @@ head, body {
   float: left;
   
 }
-.footerlinha hr{
-  width: 0.1;
-  height:100px;
+.footerlinha hr{ /* linha q separa os links contactos etc das fotos poch etc */
+  width: 0.5%;
+  height: 40%;
   margin-left: 4%;
 }
 .active{
@@ -153,70 +160,94 @@ head, body {
   height: 160%;
   width: 100%;
 }
-.esq{
+.esq{ /* 2 tabela da esquerda (a seguir a informacoes) */ 
   float: left;
   background-color: white;
-  height: 300px;
+  height: 24%;
   width: 25%;
-  margin-top: 20px;
-  margin-left: 45px;
+  margin-top: 1%;
+  margin-left: 3%;
   border: 1px solid #17c;
 }
 .esqbdireito{
   float: left;
   background-color: white;
-  height: 300px;
+  height: 28%;
   width: 25%;
-  margin-top: 20px;
-  margin-left: 45px;
+  margin-top: 1%;
+  margin-left: 3%;
   border: 1px solid #17c;
+  font-size: 1.2vw;
   border-radius: 0px 0px 0px 25px;
 }
-.esqcdireito{
+.esqcdireito{ /* informacoes */ 
   float: left;
   background-color: white;
-  height: 300px;
+  height: 28%;
   width: 25%;
-  margin-top: 20px;
-  margin-left: 45px;
+  margin-top: 1.2%;
+  margin-left: 3%;
   border: 1px solid #17c;
   border-radius: 25px 0px 0px 0px;
+  font-size: 1.2vw;
 }
+
+/* Horario */
 .horario{
   float: right;
   background-color: white;
-  height: 600px;
+  height: 52%;
   width: 65%;
-  margin-top: 20px;
-  margin-right: 45px;
+  margin-top: 1.2%;
+  margin-right: 3.5%;
   border: 1px solid #17c;
   border-radius: 0px 25px 0px 0px;
 }
+.horariotabela{
+  background: #c2cadd;
+	border-collapse: separated;
+	margin: 0.5%; 
+	border: 5px solid #17c;
+	table-layout: auto;
+  display: table;
+  width: 98.9%;
+  height: 90%;
+  text-align: center;
+  font-size: 95%;
+  border-collapse: collapse;
+}
+.horariotabela td{
+  border: 0.5px solid white;
+}
+
 .tab{
   background-color: #17c;
   width: 100%;
-  height: 50px;
+  height: 18%;
   text-align: center;
   color: white;
-  line-height:50px;
+  line-height: 310%;
+  font-size: 1.2vw;
 }
 .tabcdireito{
   background-color: #17c;
   width: 100%;
-  height: 50px;
+  height: 18%;
   text-align: center;
   color: white;
-  line-height:50px;
+  line-height: 310%;
   border-radius: 23px 0px 0px 0px;
+  font-size: 1.2vw;
 }
 .tabhorario{
   background-color: #17c;
   width: 100%;
-  height: 50px;
+  height: 8.5%;
   text-align: center;
   color: white;
-  line-height:50px;
+  line-height: 310%;
   border-radius: 0px 23px 0px 0px;
+  font-size: 1.2vw;
 }
 .desc{
   height: 100%;
@@ -230,54 +261,32 @@ head, body {
 .informacao{
   float: right;
   background-color: white;
-  height: 322px;
+  height: 28%;
   width: 65%;
-  margin-top: 20px;
-  margin-right: 45px;
+  margin-top: 1.5%;
+  margin-right: 3.4%;
   border: 1px solid #17c;
   border-radius: 0px 0px 25px 0px;
 }
-.infocontainer{
+.infocontainer{ /* informacoes */
   width: 90%;
   height: 22%;
   background-color: rgb(226, 226, 226);
   float: left;
-  margin-top: 12px;
-  margin-left: 12px;
+  margin-top: 4%;
+  margin-left: 5%;
   line-height: 450%; /* 65px */
   border-radius: 10%;
-  font-size: 15;
-  
+  font-size: 1vw;
 }
-
-
-
-.horariotabela{
-  background: #c2cadd;
-	border-collapse:separated;
-	margin:5px; 
-	border:5px solid #17c;
-	table-layout: auto;
-  display: table;
-  width: 98.9%;
-  text-align: center;
-  height: 90%;
-  font-size: 12;
-  border-collapse: collapse;
-}
-.horariotabela td{
-  
-  
-  border: 0.5px solid white;
-}
-.tit{
+.tit{ /* dia da semana */
   background-color: rgb(32, 124, 178);
   color: white;
-  font-size: 16;
+  font-size: 110%;
 }
 .hora{
   width: 6%;
-  font-size: 12;
+  font-size: 90%;
   color:rgb(11, 33, 51);
   font-weight: bold;
   color: white;

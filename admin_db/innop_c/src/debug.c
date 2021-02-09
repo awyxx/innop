@@ -1,11 +1,12 @@
 #include "debug.h"
+#include "dados.h"
 #include <stdio.h>
 
 // bool g_debug;
 
 void tentativa(char* str, ...)
 {
-    if (1)
+    if (!g_debug)
         return;
     va_list args;
     va_start(args, str);
@@ -15,22 +16,20 @@ void tentativa(char* str, ...)
 
 void sucesso(const char* str)
 {
-    if (1)
+    if (!g_debug)
         return;
-    fprintf(stdout, GREEN " [OK] %s.\n" NORMAL, str);
+    fprintf(stdout, GREEN " \n[OK] %s.\n" NORMAL, str);
 }
 
 void erro(const char* str)
 {
-    if (0)
-        return;
-    fprintf(stderr, RED " [ERRO] %s.\n" NORMAL, str);
+    fprintf(stderr, RED " \n[ERRO] %s.\n" NORMAL, str);
 }
 
 void erro_mysql(MYSQL* con, bool sair)
 {
     fprintf(stderr,
-            RED " [ERRO] %d: %s \n\n" NORMAL,
+            RED " \n[ERRO] %d: %s \n\n" NORMAL,
             mysql_errno(con),
             mysql_error(con));
     if (!sair)

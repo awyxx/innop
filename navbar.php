@@ -77,10 +77,10 @@
             
         
             ?>
-            <a href="logout.php"><img src="imagens/logout.png" width="30px" height="30px" legend="Encerrar Sessão"></a>
+            <a href="logout.php"><img src="imagens/logout.png" width="6%" height="20%" legend="Encerrar Sessão"></a>
         </div>
         <div class="direita">
-            <div class="imagem"> <?php echo '<img height=88px width=88px src="data:image/jpeg;base64,'.base64_encode( $_SESSION['img'] ).'"/>'; ?> </div>
+            <div class="imagem"> <?php echo '<img height=100% width=100% src="data:image/jpeg;base64,'.base64_encode( $_SESSION['img'] ).'"/>'; ?> </div>
         </div>
 
     </div>

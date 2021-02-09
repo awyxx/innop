@@ -25,8 +25,11 @@ bool executar_query_mysql(MYSQL* con, const char* query);
 /* da return ao numero de campos(colunas) de uma tabela */
 int numero_campos_mysql(MYSQL* con, const char* tabela);
 
-/* pede os campos de um registo e armazena-os numa matrix(usado para inserir!) */ 
-void pedir_campos_mysql(MYSQL* con, const char* tabela, char registo[16][128]);
+/* pede os campos de um registo e armazena-os numa matrix(usado para
+ * inserir!) */
+void pedir_campos_mysql(MYSQL* con,
+                        const char* tabela,
+                        char registo[16][128]);
 
 /* mostra os campos (colunas) de uma tabela */
 void mostrar_campos_mysql(MYSQL* con, const char* tabela);

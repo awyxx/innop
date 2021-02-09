@@ -10,4 +10,8 @@ typedef struct inno_dados
     const char* db; /* nome base de dados */
 } _inno;
 
+// variavel da nossa struct
 extern _inno inno;
+
+// variavel bool para verificar se queremos as mensagens de debug ou nao
+extern int g_debug;

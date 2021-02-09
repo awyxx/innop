@@ -5,6 +5,7 @@ void menu();
 
 // insert
 void menu_inserir();
+void inserir_manualmente();
 void inserir_query();
 void inserir_ficheiro();
 

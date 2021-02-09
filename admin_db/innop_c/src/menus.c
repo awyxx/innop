@@ -58,14 +58,14 @@ void menu_inserir()
     printf("\n********************************\n");
     printf("1. Introduzir manualmente\n");
     printf("2. Introduzir por query\n");
-    printf("3. Introduzir varias queries por ficheiro\n");
+    printf("3. Introduzir varias queries usando um ficheiro\n");
     printf("0. Voltar\n");
     printf("\n > ");
     scanf("%d", &opc);
     switch (opc)
     {
         case 1:
-            // manually
+            inserir_manualmente();
             break;
         case 2:
             inserir_query();
@@ -84,20 +84,196 @@ void menu_inserir()
     }
 }
 
+void inserir_manualmente()
+{
+    system("clear");
+    mostrar_tabelas_mysql(inno.con, inno.db);
+
+    char tabela[32];
+    printf("\nNome da tabela que pretende introduzir (0 = voltar): ");
+    scanf("%s", tabela);
+
+    if (!tabela_existe(inno.con, inno.db, tabela))
+    {
+        printf(RED "\nTabela nao existe!" NORMAL);
+        pressione_tecla_para_continuar();
+        system("clear");
+        inserir_manualmente();
+        return;
+    }
+
+    if (!strcmp(tabela, "0"))
+    {
+        system("clear");
+        menu_inserir();
+        return;
+    }
+
+    char c[16][128]; // campos
+    pedir_campos_mysql(inno.con, tabela, c);
+
+    // optimizar??? n cnsg pensar
+    char query[512];
+    if (!strcmp(tabela, "aluno"))
+        format_str(query,
+                   "(%s,%s,'%s',%s,'%s','%s','%s',%s,'%s',NULL)",
+                   c[0],
+                   c[1],
+                   c[2],
+                   c[3],
+                   c[4],
+                   c[5],
+                   c[6],
+                   c[7],
+                   c[8]);
+    else if (!strcmp(tabela, "cartao"))
+        format_str(query, "(%s, '%s', %s)", c[0], c[1], c[2]);
+    else if (!strcmp(tabela, "disciplina"))
+        format_str(query, "(%s, '%s', %s)", c[0], c[1], c[2]);
+    else if (!strcmp(tabela, "dt"))
+        format_str(query, "(%s, %s)", c[0], c[1]);
+    else if (!strcmp(tabela, "ee"))
+        format_str(query,
+                   "(%s,'%s','%s','%s',%s,'%s')",
+                   c[0],
+                   c[1],
+                   c[2],
+                   c[3],
+                   c[4],
+                   c[5]);
+    else if (!strcmp(tabela, "faltas"))
+        format_str(query,
+                   "(%s,%s,'%s','%s',%s,%s,'%s')",
+                   c[0],
+                   c[1],
+                   c[2],
+                   c[3],
+                   c[4],
+                   c[5],
+                   c[6]);
+    else if (!strcmp(tabela, "horarios"))
+        format_str(query,
+                   "(%s,%s,'%s','%s','%s','%s','%s')",
+                   c[0],
+                   c[1],
+                   c[2],
+                   c[3],
+                   c[4],
+                   c[5],
+                   c[6]);
+    else if (!strcmp(tabela, "notas"))
+        format_str(query, "(%s,%s,%s,%s,%s)", c[0], c[1], c[2], c[3], c[4]);
+    else if (!strcmp(tabela, "professor"))
+        format_str(query,
+                   "(%s,'%s',%s,'%s','%s',%s,'%s',NULL)",
+                   c[0],
+                   c[1],
+                   c[2],
+                   c[3],
+                   c[4],
+                   c[5],
+                   c[6]);
+    else if (!strcmp(tabela, "sumarios"))
+        format_str(query,
+                   "(%s,%s,%s,'%s',%s,'%s')",
+                   c[0],
+                   c[1],
+                   c[2],
+                   c[3],
+                   c[4],
+                   c[5]);
+    else if (!strcmp(tabela, "turma"))
+        format_str(query, "(%s,%s,%s,%s,%s)", c[0], c[1], c[2], c[3], c[4]);
+    else if (!strcmp(tabela, "turmas"))
+        format_str(query,
+                   "(%s,'%s',%s,'%s',%s)",
+                   c[0],
+                   c[1],
+                   c[2],
+                   c[3],
+                   c[4]);
+
+    char query_asr[600];
+    format_str(query_asr, "INSERT INTO %s VALUES %s", tabela, query);
+
+    if (executar_query_mysql(inno.con, query_asr))
+    {
+        printf(GREEN "\nRegisto introduzido com sucesso!\n" NORMAL);
+        pressione_tecla_para_continuar();
+        menu();
+    }
+
+    menu_inserir();
+}
+
 void inserir_query()
 {
     system("clear");
     mostrar_tabelas_mysql(inno.con, inno.db);
-    printf("\nDica: INSERT INTO tabela (campo1, campo2, ...) VALUES (val1, val2, ...)\n");
-    printf("\n Digite a query: -> ");
+    printf("\nDica: INSERT INTO tabela (campo1, campo2, ...) VALUES "
+           "(val1, val2, ...)\n");
+    printf("\n Digite a query (-1 para voltar): -> ");
     char* query = ler_query();
+    if (strstr(query, "-1") != NULL)
+    {
+        system("clear");
+        menu_inserir();
+        return;
+    }
     executar_query_mysql(inno.con, query);
     menu_inserir();
 }
 
 void inserir_ficheiro()
 {
-    // hmmmmm
+    tentativa("inserir_ficheiro()\n");
+    system("clear");
+
+    char nome_ficheiro[64];
+    printf("\nDigite o nome do ficheiro onde as suas queries estao (0 = "
+           "voltar): ");
+    scanf("%s", nome_ficheiro);
+
+    if (!strcmp(nome_ficheiro, "0"))
+    {
+        system("clear");
+        menu_inserir();
+        return;
+    }
+
+    FILE* f;
+    f = fopen(nome_ficheiro, "r");
+    if (f == NULL)
+    {
+        printf(RED "Ficheiro nao existe!\n" NORMAL);
+        pressione_tecla_para_continuar();
+        inserir_ficheiro();
+    }
+
+    // ler linha a linha e tentar executar query
+    char query[512];
+    int n = 0;
+    while (fgets(query, sizeof(query), f))
+    {
+        if (executar_query_mysql(inno.con, query))
+        {
+            printf(GREEN
+                   "Linha/Query Nº %d executada com sucesso!\n" NORMAL,
+                   n);
+        }
+        n++;
+    }
+
+    if (!n)
+    {
+        printf(RED "Ficheiro vazio!\n" NORMAL);
+        pressione_tecla_para_continuar();
+        inserir_ficheiro();
+    }
+
+    fclose(f);
+    pressione_tecla_para_continuar();
+    menu();
 }
 
 /***************
@@ -383,15 +559,31 @@ void menu_remover()
     suporte
 ******************/
 
-void suporte() 
+void suporte()
 {
-    printf(""
-    "InnoPlus é um projeto desenvolvido por 2 alunos do curso profissional de GSPI, Nelson e Roberto, feito para o trabalho final de curso.\n"
-    "O seu objetivo é reunir algumas das utilidades mais importantes para a gestão escolar, de uma forma optimizada e mais apelativa e fácil de usar.\n"
-    "Possuímos várias ferramentas, para aumentar a compatibilidade entre outros como por exemplo os vários sistemas operativos ou dispositivos.\n\n"
-    
-    "Este programa em C, destina-se ao uso avançado do administrador da base de dados, sendo assim, um bocado mais difícil de usar mas só deve ser usado quando preciso.\n"
-    "Temos um programa em vb.NET, destinando-se ao uso dos professores, é semelhante ao site, mas pode ser usado nativamente para computadores com Windows.\n" 
-    "O site irá servir como a 'ponte' de compatibilidade com outros dispositivos/plataformas, como por exemplo, telemóveis, tablets, ou computadores com Linux ou MacOS. "
-    "Tem as mesmas utilidades que o programa em vb.NET, também vai ter um login para o administrador caso queira usar uma interface mais amigável para a gestão da base de dados (invés de usar o programa em C).\n");
+    printf(
+      ""
+      "InnoPlus é um projeto desenvolvido por 2 alunos do curso "
+      "profissional de GSPI, Nelson e Roberto, feito para o trabalho "
+      "final de curso.\n"
+      "O seu objetivo é reunir algumas das utilidades mais importantes "
+      "para a gestão escolar, de uma forma optimizada, mais apelativa e "
+      "fácil de usar.\n"
+      "Possuímos várias ferramentas, para aumentar a compatibilidade "
+      "entre os vários sistemas operativos ou dispositivos.\n\n"
+      "Este programa em C, destina-se ao uso avançado do administrador "
+      "da base de dados, sendo assim ligeiramente mais difícil de usar "
+      "mas só deve ser usado quando preciso.\n"
+      "Temos um programa em vb.NET, destinando-se ao uso dos "
+      "professores, é semelhante ao site, mas pode ser usado nativamente "
+      "para computadores com Windows.\n"
+      "O site irá servir como a 'ponte' de compatibilidade com outros "
+      "dispositivos/plataformas, como por exemplo, telemóveis, tablets, "
+      "ou computadores com Linux ou MacOS. "
+      "Tem as mesmas utilidades que o programa em vb.NET, também vai ter "
+      "um login para o administrador caso queira usar uma interface mais "
+      "amigável para a gestão da base de dados (invés de usar o programa "
+      "em C).\n\n");
+    pressione_tecla_para_continuar();
+    menu();
 }

@@ -1,0 +1,14 @@
+O programa em C Ã©simples e nada de complexo, o seu objetivo principal Ã a otimizaÃÃo e a simplicidade!
+
+Para compilar usamos o "make", ou seja um makefile, que transforma todos os ficheiros C em objetos, para assim o seu conteudo puder
+ ser usado em outros ficheiros .c.
+Sendo assim, usando um makefile e a sua ideologia, o nosso projeto ficarÃÃ ¡mais organiza e nÃo teremos de recompilar tudo sempre que fazemos 
+ alteraÃÃes, mas sim sÃ o ficheiro em que mudamos algo.
+
+Dependencias linux para compilar:
+	-> gcc 
+	-> default-libmysqlclient-dev
+
+Os ficheiros .symlink e .formatcode sao bash scripts que foram usados no desenvolvimento do trabalho
+	-> .symlink : Usado para corrigir um erro do MySQL (falta de um socket)
+	-> .formatcode : Usado para auto identar o nosso codigo (usando o clang-format)

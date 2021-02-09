@@ -4,7 +4,7 @@
 
     <meta charset="UTF-8">
     <link rel="stylesheet" href="index.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
 </head>
 
@@ -85,34 +85,34 @@ if (!isset($_SESSION["codprof"])) {
                 <table class="horariotabela">
                     <th class="tit"> <img src="imagens/plus.png" width="22px" height="20px">  </th> <th class="tit"> Segunda-Feira </th> <th class="tit"> Terça-Feira </th> <th class="tit"> Quarta-Feira </th> <th class="tit"> Quinta-Feira </th> <th class="tit"> Sexta-Feira </th>
                     <tr>
-                    <td class="hora"> 8:15 9:05 </td><td> ---</td>                          <td> EDFP </td>                     <td> PSINF/RED </td>                     <td> --- </td>                         <td> RED/PSINF </td>
+                    <td class="hora"> 8:15 <br> 9:05 </td><td> ---</td>                          <td> EDFP </td>                     <td> PSINF/RED </td>                     <td> --- </td>                         <td> RED/PSINF </td>
                     </tr>
                     <tr>
-                    <td class="hora"> 9:10 10:00 </td>  <td> MAT </td>                      <td> EDFP </td>                     <td> PSINF/RED </td>                     <td> PORT </td>                        <td> RED/PSINF </td>
+                    <td class="hora"> 9:10 <br> 10:00 </td>  <td> MAT </td>                      <td> EDFP </td>                     <td> PSINF/RED </td>                     <td> PORT </td>                        <td> RED/PSINF </td>
                     </tr>
                     <tr>
-                    <td class="hora"> 10:10 11:00 </td> <td> PSINF/RED </td>                <td> MAT </td>                      <td> MAT </td>                           <td> PORT </td>                        <td> PSINF/RED </td>
+                    <td class="hora"> 10:10 <br> 11:00 </td> <td> PSINF/RED </td>                <td> MAT </td>                      <td> MAT </td>                           <td> PORT </td>                        <td> PSINF/RED </td>
                     </tr>
                     <tr>
-                    <td class="hora"> 11:05 11:55 </td> <td> PSINF/RED </td>                <td> MAT </td>                      <td> RED/PSINF </td>                     <td> MAT </td>                         <td> PSINF/RED </td>
+                    <td class="hora"> 11:05 <br> 11:55 </td> <td> PSINF/RED </td>                <td> MAT </td>                      <td> RED/PSINF </td>                     <td> MAT </td>                         <td> PSINF/RED </td>
                     </tr>
                     <tr>
-                    <td class="hora"> 12:00 12:50 </td> <td> PSINF/FSQ </td>                <td class="almoco"> ALMOÇO </td>    <td> RED/PSINF </td>                     <td> FSQ </td>                         <td> FSQ </td>
+                    <td class="hora"> 12:00 <br> 12:50 </td> <td> PSINF/FSQ </td>                <td class="almoco"> ALMOÇO </td>    <td> RED/PSINF </td>                     <td> FSQ </td>                         <td> FSQ </td>
                     </tr>
                     <tr>
-                    <td class="hora"> 13:20 14.10 </td> <td class="almoco"> ALMOÇO </td>    <td> RED/PSINF </td>                <td> --- </td>                           <td class="almoco"> ALMOÇO </td>       <td class=almoco> ALMOÇO </td>
+                    <td class="hora"> 13:20 <br>  14.10 </td> <td class="almoco"> ALMOÇO </td>    <td> RED/PSINF </td>                <td> --- </td>                           <td class="almoco"> ALMOÇO </td>       <td class=almoco> ALMOÇO </td>
                     </tr>
                     <tr>
-                    <td class="hora"> 14:15 15:05 </td> <td> RED/PSINF </td>                <td> PSINF/RED </td>                <td> --- </td>                           <td> PSINF/RED </td>                   <td> PORT </td>
+                    <td class="hora"> 14:15 <br> 15:05 </td> <td> RED/PSINF </td>                <td> PSINF/RED </td>                <td> --- </td>                           <td> PSINF/RED </td>                   <td> PORT </td>
                     </tr>
                     <tr>
-                    <td class="hora"> 15:10 16:00 </td> <td> RED/PSINF </td>                <td> PSINF/RED </td>                <td> --- </td>                           <td> PSINF/RED </td>                   <td> PORT </td>
+                    <td class="hora"> 15:10 <br> 16:00 </td> <td> RED/PSINF </td>                <td> PSINF/RED </td>                <td> --- </td>                           <td> PSINF/RED </td>                   <td> PORT </td>
                     </tr>
                     <tr>
-                    <td class="hora"> 16:05 16:55 </td> <td> FSQ/PSINF </td>                <td> RED/PSINF </td>                <td> --- </td>                           <td> RED/PSINF </td>                   <td> --- </td>
+                    <td class="hora"> 16:05 <br> 16:55 </td> <td> FSQ/PSINF </td>                <td> RED/PSINF </td>                <td> --- </td>                           <td> RED/PSINF </td>                   <td> --- </td>
                     </tr>
                     <tr>
-                    <td class="hora"> 17:00 17:50 </td> <td> PORT </td>                     <td> RED/PSINF </td>                <td> --- </td>                           <td> RED/PSINF </td>                   <td> --- </td>
+                    <td class="hora"> 17:00 <br> 17:50 </td> <td> PORT </td>                     <td> RED/PSINF </td>                <td> --- </td>                           <td> RED/PSINF </td>                   <td> --- </td>
                     </tr>
 
 
