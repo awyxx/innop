@@ -98,6 +98,10 @@ guardar_dados_sessao($result);
 mysqli_free_result($result);
 // se o usuario existir, damos welcome e abrimos-lhe outra pagina
 // welcome, gif, sleep, ...?
+/*
+    NAO ESQUECER QUE, SE O STATUS DO CLIENT FOR ADMIN TEMOS Q LHE REDIRECIONAR PARA OUTRA PAGINA E NAO PARA index.php... index.php é para os stores!
+    ADMINS VAO PARA ../admin_db/menu.php
+*/
 header("Location: ../index.php");
 exit;
 
