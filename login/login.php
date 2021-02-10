@@ -96,8 +96,13 @@ if (!$valido) {
 // guardar sessao
 guardar_dados_sessao($result);
 mysqli_free_result($result);
-// se o usuario existir, damos welcome e abrimos-lhe outra pagina
-// welcome, gif, sleep, ...?
+
+// se o usuario existir, damos welcome e abrimos-lhe outra pagina (welcome, gif, sleep, ...?)
+// NAO ESQUECER, SE FOR ADMIN, MANDA-LO PARA A PAGINA DO ADMIN E NAO PARA A PAGINA DO STOR!
+// OU SEJA, IR BUSCAR 'STATUS' DO CLIENT E VER SE É ADMIN OU PROF
+// if (status == 'admin)
+    // header("Location: ../admin_db/menu.php");
+// else
 header("Location: ../index.php");
 exit;
 

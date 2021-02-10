@@ -129,7 +129,7 @@ void inserir_manualmente()
     else if (!strcmp(tabela, "cartao"))
         format_str(query, "(%s, '%s', %s)", c[0], c[1], c[2]);
     else if (!strcmp(tabela, "disciplina"))
-        format_str(query, "(%s, '%s', %s)", c[0], c[1], c[2]);
+        format_str(query, "(%s, '%s', %s, %s)", c[0], c[1], c[2], c[3]);
     else if (!strcmp(tabela, "dt"))
         format_str(query, "(%s, %s)", c[0], c[1]);
     else if (!strcmp(tabela, "ee"))
@@ -175,13 +175,14 @@ void inserir_manualmente()
                    c[6]);
     else if (!strcmp(tabela, "sumarios"))
         format_str(query,
-                   "(%s,%s,%s,'%s',%s,'%s')",
+                   "(%s,%s,%s,'%s',%s,'%s',%s)",
                    c[0],
                    c[1],
                    c[2],
                    c[3],
                    c[4],
-                   c[5]);
+                   c[5],
+                   c[6]);
     else if (!strcmp(tabela, "turma"))
         format_str(query, "(%s,%s,%s,%s,%s)", c[0], c[1], c[2], c[3], c[4]);
     else if (!strcmp(tabela, "turmas"))

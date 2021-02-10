@@ -41,7 +41,7 @@
             valores[i] = col.innerHTML;
         }
 
-        // form ... 
+        // form para confirmar a alteração ou o remover... 
         document.write("<form method='post'>");
             document.write("<input name='oldcodval' readonly type='text' value='",campo_principal,"'> ESCONDER ISTO<br>");
             document.write("<input name='oldcod' readonly type='text' value='", valores[0],"'> ESCONDER ISTO! <br>");
@@ -163,6 +163,7 @@ function campos_tabela($tabela, $con) {
 
 session_start();
 include("../connect_db.php");
+
 // form + select menu com as tabelas!
 printf("<center>");                                                             // tag center
 printf("<br>");

@@ -13,7 +13,7 @@
     <?php
 
     // tirar os warnings / erros !!! IMPORTANTE !!!!
-    error_reporting(0);
+    // error_reporting(0);
 
     // se nao dermos start nao da p usar $_SEssion mas isto da erro na mesma, fix l8r
     session_start(); 
