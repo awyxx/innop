@@ -40,25 +40,48 @@
             if (i == n-1)   break; 
             valores[i] = col.innerHTML;
         }
-
-        // form ... 
-        document.write("<form method='post'>");
-            document.write("<input name='oldcodval' readonly type='text' value='",campo_principal,"'> ESCONDER ISTO<br>");
-            document.write("<input name='oldcod' readonly type='text' value='", valores[0],"'> ESCONDER ISTO! <br>");
+        
+        document.write("<form id='formprincipal' method='post'>");
+        document.body.style.backgroundImage = "url('../imagens/login_background.jpg')";
+        document.body.style.font
+        document.write("<center>");
+        document.write("<img style='height:20%' src='../imagens/innoplus_icon_branco.png'>");
+        document.write("<br><br>");
+        document.write("<fieldset style=' background: rgba(20, 55, 55, .5); width:40%; text-align:justify; font-family: Roboto, sans-serif;'>");
+        document.write("<img src='../imagens/lapiz.png' width=50% style='float:right'>");
+        document.write("<table style='background-color:ligghblue; color:white; font-size:130%;'>");
+            document.write("<input name='oldcodval' readonly type='hidden' value='",campo_principal,"'>");
+            document.write("<input name='oldcod' readonly type='hidden' value='", valores[0],"'>");
             // modificar
             if (element.value == "Modificar") {
                 for (var i = 0; i < n-1; i++)
-                    document.write(campos[i], "<input name='tb",i,"' type='text' value='",valores[i],"'> <br>");
-                document.write("<input name='concluido_post' type='submit' value='Modificar'>");
+                {
+                    document.write("<tr>");
+                    document.write("<td>",campos[i],"</td> <td><input style='font-size:80%' name='tb",i,"' type='text' value='",valores[i],"'> </td>");
+                    document.write("</tr>");
+                }
+
+                document.write("<tr> <td colspan='2'> <hr style='border:10px solid rgba(20, 55, 55, .0)'> </td> </tr>");
+
+                document.write("<tr>");
+                document.write("<td colspan='2'> <input style='height:100%;width:100%;background-color:rgb(255,255,102);font-size:90%' name='concluido_post' type='submit' value='Modificar'> </td>");
+                document.write("</tr>");
+                document.write("<tr>");
+                document.write("<td colspan='2'> <a href='menu.php'> <input style='height:100%;width:100%;background-color:White;font-size:90%' name='Insert_Ad' type='button' value='Voltar'> </a> </td> "); // transformar em botao
+                document.write("</tr>");
             }
+                                                                                             
             // apagar
             else if (element.value == "Remover") {
                 for (var i = 0; i < n-1; i++)
                     document.write(campos[i], "<input disabled type='text' value='",valores[i],"'> <br>");
                 document.write("<input name='concluido_post' type='submit' value='Apagar'>");
             }
+        document.write("</table>");
+        document.write("</fieldset>")
+        document.write("</center>");
         document.write("</form>");
-        document.write("<a href='menu.php'> Voltar </a> "); // transformar em botao
+        
     }
 
     </script>
@@ -237,14 +260,14 @@ if (isset($_POST["concluido_post"])) {
             printf("<a href='menu.php'> Voltar </a> "); // transformar em botao
             exit;
         }
-
+        
         // fazer o update (optimizar??? how)
         if ($tabela == "aluno")
             $query_campos =  "`codaluno`=$dados[0],`codee`=$dados[1],`nome`='$dados[2]',`cc`=$dados[3],`datanasc`='$dados[4]',`nacionalidade`='$dados[5]',`morada`='$dados[6]',`telemovel`=$dados[7],`email`='$dados[8]'";
         else if ($tabela == "cartao")
             $query_campos = "`codcartao`=$dados[0],`status`='$dados[1]',`saldo`=$dados[2]"; 
         else if ($tabela == "disciplina")
-            $query_campos = "`coddisciplina`=$dados[0],`nome`='$dados[1]',`ano`=$dados[2]";
+            $query_campos = "`coddisciplina`=$dados[0],`nome`='$dados[1]',`ano`=$dados[2],`codprof`='$dados[3]'";
         else if ($tabela == "dt")
             $query_campos = "`coddt`=$dados[0],`codprof`=$dados[1]";
         else if ($tabela == "ee")
@@ -258,7 +281,7 @@ if (isset($_POST["concluido_post"])) {
         else if ($tabela == "professor")
             $query_campos = "`codprof`=$dados[0],`nome`='$dados[1]',`cc`=$dados[2],`datanasc`='$dados[3]',`nacionalidade`='$dados[4]',`telemovel`=$dados[5],`email`='$dados[6]'";
         else if ($tabela == "sumarios")
-            $query_campos = "`codprof`=$dados[0],`codturma`=$dados[1],`licao`=$dados[2],`sumario`='$dados[3]',`hora`='$dados[4]',`diasemana`='$dados[5]'";
+            $query_campos = "`codprof`=$dados[0],`codturma`=$dados[1],`licao`=$dados[2],`sumario`='$dados[3]',`hora`='$dados[4]',`diasemana`='$dados[5]',`coddisciplina`='$dados[6]'";
         else if ($tabela == "turma")
             $query_campos = "`codaluno`=$dados[0],`codhorario`=$dados[1],`codturma`=$dados[2],`numaluno`=$dados[3],`cartaluno`=$dados[4]";
         else if ($tabela == "turmas")
@@ -321,14 +344,14 @@ if (isset($_POST["ins_post_mysql"])) {
     $query = array(
         "INSERT INTO `aluno`(`codaluno`, `codee`, `nome`, `cc`, `datanasc`, `nacionalidade`, `morada`, `telemovel`, `email`,`Imagem`) VALUES ($dados[0],$dados[1],'$dados[2]',$dados[3],'$dados[4]','$dados[5]','$dados[6]',$dados[7],'$dados[8]', null);",
         "INSERT INTO `cartao`(`codcartao`,`status`,`saldo`,`img`) VALUES ($dados[0],'$dados[1]',$dados[2],null);",
-        "INSERT INTO `disciplina`(`coddisciplina`, `nome`, `ano`) VALUES ($dados[0],'$dados[1]',$dados[2]);",
+        "INSERT INTO `disciplina`(`coddisciplina`, `nome`, `ano`, `codprof`) VALUES ($dados[0],'$dados[1]',$dados[2],$dados[3]);",
         "INSERT INTO `dt`(`coddt`, `codprof`, `codturma`, `numaluno`) VALUES ($dados[0],$dados[1],$dados[2],$dados[3]);",
         "INSERT INTO `ee`(`codee`, `nome`, `parentesco`, `morada`, `telemovel`, `email`) VALUES ($dados[0],'$dados[1]','$dados[2]','$dados[3]',$dados[4],'$dados[5]');",
         "INSERT INTO `faltas`(`codfalta`, `codaluno`, `datafalta`, `diasemana`, `idxhora`, `coddisciplina`, `tipofalta`) VALUES ($dados[0],$dados[1],$dados[2],$dados[3],$dados[4],$dados[5],'$dados[6]');",
         "INSERT INTO `horarios`(`codhorario`, `hora`, `seg`, `ter`, `qua`, `qui`, `sex`) VALUES ($dados[0],$dados[1],'$dados[2]','$dados[3]','$dados[4]','$dados[5]','$dados[6]');",
         "INSERT INTO `notas`(`codaluno`, `coddisciplina`, `nota`, `periodo`, `anoescolar`) VALUES ($dados[0],$dados[1],$dados[2],$dados[3], $dados[4]);",
         "INSERT INTO `professor`(`codprof`, `nome`, `cc`, `datanasc`, `nacionalidade`, `telemovel`, `email`, `img`) VALUES ($dados[0],'$dados[1]',$dados[2],$dados[3],'$dados[4]',$dados[5],'$dados[6]',null);",
-        "INSERT INTO `sumarios`(`codprof`, `codturma`, `licao`, `sumario`, `hora`, `diasemana`) VALUES ($dados[0],$dados[1],$dados[2],'$dados[3]',$dados[4],'$dados[5]');",
+        "INSERT INTO `sumarios`(`codprof`, `codturma`, `licao`, `sumario`, `hora`, `diasemana`, `coddisciplina`) VALUES ($dados[0],$dados[1],$dados[2],'$dados[3]',$dados[4],'$dados[5]','$dados[6]');",
         "INSERT INTO `turma`(`codaluno`, `codhorario`, `codturma`, `numaluno`, `cartaluno`) VALUES ($dados[0],$dados[1],$dados[2],$dados[3],$dados[4]);",
         "INSERT INTO `turmas`(`codturma`, `sigla`, `ano`, `curso`, `coddt`) VALUES ($dados[0],'$dados[1]',$dados[2],'$dados[3]', $dados[4]);",
     );

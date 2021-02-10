@@ -33,6 +33,7 @@ head, body {
 }
 .select_css::selection{
     background-color: #17a;
+    text-align: justify;
 }
 
 /*
@@ -133,3 +134,16 @@ background-color: rgb(104, 241, 116);
     border-radius: 2px;
     transition-duration: 0.2s;  /* transição entre hover */
   }
+
+  .forms{
+    font-family: 'Roboto', sans-serif;
+    margin: 0%;
+    background-image: url(../imagens/login_background.jpg);
+  }
+
+  #formprincipal{
+    font-family: 'Roboto', sans-serif;
+    margin: 0%;
+    background-image: url(../imagens/login_background.jpg);
+  }
+
