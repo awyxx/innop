@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <html>
 
 <head>
@@ -40,13 +42,6 @@
             if (i == n-1)   break; 
             valores[i] = col.innerHTML;
         }
-<<<<<<< HEAD
-
-        // form para confirmar a alteração ou o remover... 
-        document.write("<form method='post'>");
-            document.write("<input name='oldcodval' readonly type='text' value='",campo_principal,"'> ESCONDER ISTO<br>");
-            document.write("<input name='oldcod' readonly type='text' value='", valores[0],"'> ESCONDER ISTO! <br>");
-=======
         
         document.write("<form id='formprincipal' method='post'>");
         document.body.style.backgroundImage = "url('../imagens/login_background.jpg')";
@@ -59,7 +54,6 @@
         document.write("<table style='background-color:ligghblue; color:white; font-size:130%;'>");
             document.write("<input name='oldcodval' readonly type='hidden' value='",campo_principal,"'>");
             document.write("<input name='oldcod' readonly type='hidden' value='", valores[0],"'>");
->>>>>>> 7d2733852f304d4dd27cdebdbc42d3b07386ba5f
             // modificar
             if (element.value == "Modificar") {
                 for (var i = 0; i < n-1; i++)
@@ -120,12 +114,22 @@ function tabela_campos($tabela, $con) {
     printf("</tr>");
 }
 
+function contar_campos($tabela) {
+    $query = "SHOW COLUMNS FROM $tabela";
+    $result = mysqli_query($con, $query);
+    $rows = mysqli_num_rows($result);
+    printf("YA BRO ROWS : %d", $rows);
+}
+
 // vai printar os registos (as 'linhas') da tabela, formatados para a tabela html!
 function tabela_registos($tabela, $db) {
-    // numero de campos por tabela
-    // optimizar com show columns query!
-    $ncampos = array("aluno"=>9, "cartao"=>3, "disciplina"=>3, "dt"=>4, "ee"=>6, "faltas"=>7, "horarios"=>7, 
-                     "notas"=>5, "professor"=>7, "sumarios"=>6, "turma"=>5, "turmas"=>5);
+    // numero de campos por tabela (pa sabermos quantas colunas vamos ter !)
+    $ncampos = array("aluno"=>num_campos_tabela("aluno", $db),          "cartao"=>num_campos_tabela("cartao", $db), 
+                    "disciplina"=>num_campos_tabela("disciplina", $db), "dt"=>num_campos_tabela("dt", $db), 
+                    "ee"=>num_campos_tabela("ee", $db),                 "faltas"=>num_campos_tabela("faltas", $db), 
+                    "horarios"=>num_campos_tabela("horarios", $db),     "notas"=>num_campos_tabela("notas", $db), 
+                    "professor"=>num_campos_tabela("professor", $db),   "sumarios"=>num_campos_tabela("sumarios", $db), 
+                    "turma"=>num_campos_tabela("turma", $db),           "turmas"=>num_campos_tabela("turmas", $db));
 
     // mostrar todos os registos da tabela, formatado pra tabela html
     $query = "SELECT * FROM ". $tabela;
@@ -192,7 +196,6 @@ function campos_tabela($tabela, $con) {
 /* MAIN */
 /****** */ 
 
-session_start();
 include("../connect_db.php");
 
 // form + select menu com as tabelas!
@@ -370,7 +373,7 @@ if (isset($_POST["ins_post_mysql"])) {
         printf("Registo introduzido com sucesso!");
     }
     // printf("<a href='menu.php'> Voltar </a> "); // transformar em botao
-    printf(" <a href=«menu.php'> <button class='button' type='button'> Voltar </button> </a> ");
+    printf(" <a href='menu.php'> <button class='button' type='button'> Voltar </button> </a> ");
 }
 
 ?>
