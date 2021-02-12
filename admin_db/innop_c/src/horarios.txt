@@ -1,0 +1,12 @@
+INSERT INTO `horarios` VALUES (1,0,NULL,    'EDF',    'CN',     'BIO',     'PT')
+INSERT INTO `horarios` VALUES (1,1,'MAT',     'EDF',    'CN',     'BIO',     'PT')
+INSERT INTO `horarios` VALUES (1,2,'MAT',     'ING',    'BIO',    'CN',     'MAT')
+INSERT INTO `horarios` VALUES (1,3,'TIC',     'ING',    'BIO',    'CN',     'MAT')
+INSERT INTO `horarios` VALUES (1,4,'TIC',     NULL,   NULL,   'PT',     'MAT')
+INSERT INTO `horarios` VALUES (1,5,NULL,    NULL,   'PT',     NULL,   NULL)
+INSERT INTO `horarios` VALUES (1,6,NULL,    'FIO',    'PT',     'PT',     NULL)
+INSERT INTO `horarios` VALUES (1,7,NULL,    'FIO',    'FQ',     'PT',     NULL)
+INSERT INTO `horarios` VALUES (1,8,NULL,    NULL,   NULL,   'FQ',     NULL)
+INSERT INTO `horarios` VALUES (1,9,NULL,    NULL,   NULL,   'FQ',     NULL)
+INSERT INTO `horarios` VALUES (1,10,NULL,   NULL,   NULL,   NULL,   NULL)
+

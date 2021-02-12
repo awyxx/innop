@@ -293,18 +293,19 @@ if (isset($_POST["concluido_post"])) {
         else if ($tabela == "professor")
             $query_campos = "`codprof`=$dados[0],`nome`='$dados[1]',`cc`=$dados[2],`datanasc`='$dados[3]',`nacionalidade`='$dados[4]',`telemovel`=$dados[5],`email`='$dados[6]'";
         else if ($tabela == "sumarios")
-            $query_campos = "`codprof`=$dados[0],`codturma`=$dados[1],`licao`=$dados[2],`sumario`='$dados[3]',`hora`='$dados[4]',`diasemana`='$dados[5]',`coddisciplina`='$dados[6]'";
+            $query_campos = "`codprof`=$dados[0],`codturma`=$dados[1],`licao`=$dados[2],`sumario`='$dados[3]',`hora`=$dados[4],`diasemana`='$dados[5]',`coddisciplina`=$dados[6]";
         else if ($tabela == "turma")
             $query_campos = "`codaluno`=$dados[0],`codhorario`=$dados[1],`codturma`=$dados[2],`numaluno`=$dados[3],`cartaluno`=$dados[4]";
         else if ($tabela == "turmas")
             $query_campos = "`codturma`=$dados[0],`sigla`='$dados[1]',`ano`=$dados[2],`curso`='$dados[3]',`coddt`=$dados[4]";
 
-        $query = "UPDATE `$tabela` SET $query_campos WHERE $campo = $cod ; ";
+        $query = "UPDATE $tabela SET $query_campos WHERE $campo = $cod ;";
         $result = mysqli_query($con, $query);
         if (!$result)   printf("%s", mysqli_error($con));
         else {
             printf("<h2> Registo modificado com sucesso! </h2>");
         }
+        printf("query: %s ", $query);
     }
     
     printf("<a href='menu.php'> Voltar </a> "); // transformar em botao
@@ -342,8 +343,8 @@ if (isset($_POST["ins_post_mysql"])) {
     }
 
     if ($erro) {
-        printf("Erro! Valores nulos.");
-        printf("<a href='menu.php'> Voltar </a> "); // transformar em botao
+        printf("Erro! Valores nulos. <br>");
+        printf("<a href='menu.php'> <button class='button' type='button'> Voltar </button> </a>");
         exit;
     }
 
@@ -355,14 +356,14 @@ if (isset($_POST["ins_post_mysql"])) {
 
     $query = array(
         "INSERT INTO `aluno`(`codaluno`, `codee`, `nome`, `cc`, `datanasc`, `nacionalidade`, `morada`, `telemovel`, `email`,`Imagem`) VALUES ($dados[0],$dados[1],'$dados[2]',$dados[3],'$dados[4]','$dados[5]','$dados[6]',$dados[7],'$dados[8]', null);",
-        "INSERT INTO `cartao`(`codcartao`,`status`,`saldo`,`img`) VALUES ($dados[0],'$dados[1]',$dados[2],null);",
+        "INSERT INTO `cartao`(`codcartao`,`status`,`saldo`,`img`) VALUES ($dados[0],'$dados[1]','$dados[2]',null);",
         "INSERT INTO `disciplina`(`coddisciplina`, `nome`, `ano`, `codprof`) VALUES ($dados[0],'$dados[1]',$dados[2],$dados[3]);",
         "INSERT INTO `dt`(`coddt`, `codprof`, `codturma`, `numaluno`) VALUES ($dados[0],$dados[1],$dados[2],$dados[3]);",
         "INSERT INTO `ee`(`codee`, `nome`, `parentesco`, `morada`, `telemovel`, `email`) VALUES ($dados[0],'$dados[1]','$dados[2]','$dados[3]',$dados[4],'$dados[5]');",
         "INSERT INTO `faltas`(`codfalta`, `codaluno`, `datafalta`, `diasemana`, `idxhora`, `coddisciplina`, `tipofalta`) VALUES ($dados[0],$dados[1],$dados[2],$dados[3],$dados[4],$dados[5],'$dados[6]');",
         "INSERT INTO `horarios`(`codhorario`, `hora`, `seg`, `ter`, `qua`, `qui`, `sex`) VALUES ($dados[0],$dados[1],'$dados[2]','$dados[3]','$dados[4]','$dados[5]','$dados[6]');",
         "INSERT INTO `notas`(`codaluno`, `coddisciplina`, `nota`, `periodo`, `anoescolar`) VALUES ($dados[0],$dados[1],$dados[2],$dados[3], $dados[4]);",
-        "INSERT INTO `professor`(`codprof`, `nome`, `cc`, `datanasc`, `nacionalidade`, `telemovel`, `email`, `img`) VALUES ($dados[0],'$dados[1]',$dados[2],$dados[3],'$dados[4]',$dados[5],'$dados[6]',null);",
+        "INSERT INTO `professor`(`codprof`, `nome`, `cc`, `datanasc`, `nacionalidade`, `telemovel`, `email`, `img`) VALUES ($dados[0],'$dados[1]',$dados[2],'$dados[3]','$dados[4]',$dados[5],'$dados[6]',null);",
         "INSERT INTO `sumarios`(`codprof`, `codturma`, `licao`, `sumario`, `hora`, `diasemana`, `coddisciplina`) VALUES ($dados[0],$dados[1],$dados[2],'$dados[3]',$dados[4],'$dados[5]','$dados[6]');",
         "INSERT INTO `turma`(`codaluno`, `codhorario`, `codturma`, `numaluno`, `cartaluno`) VALUES ($dados[0],$dados[1],$dados[2],$dados[3],$dados[4]);",
         "INSERT INTO `turmas`(`codturma`, `sigla`, `ano`, `curso`, `coddt`) VALUES ($dados[0],'$dados[1]',$dados[2],'$dados[3]', $dados[4]);",
@@ -372,7 +373,6 @@ if (isset($_POST["ins_post_mysql"])) {
     else {
         printf("Registo introduzido com sucesso!");
     }
-    // printf("<a href='menu.php'> Voltar </a> "); // transformar em botao
     printf(" <a href='menu.php'> <button class='button' type='button'> Voltar </button> </a> ");
 }
 
