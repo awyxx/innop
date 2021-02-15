@@ -300,6 +300,7 @@ if (isset($_POST["concluido_post"])) {
             $query_campos = "`codturma`=$dados[0],`sigla`='$dados[1]',`ano`=$dados[2],`curso`='$dados[3]',`coddt`=$dados[4]";
 
         $query = "UPDATE $tabela SET $query_campos WHERE $campo = $cod ;";
+        //$query = "REPLACE INTO $tabela SET $query_campos"; 
         $result = mysqli_query($con, $query);
         if (!$result)   printf("%s", mysqli_error($con));
         else {
