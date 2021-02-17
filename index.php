@@ -94,7 +94,7 @@ if (!isset($_SESSION["codprof"])) {
                 "<td class='hora'>17:05<br>17:55</td>"
             );
 
-            $query = "SELECT * FROM horarios"; /* temos q adicionar codprof ao horario? ou codhorario a codprof? */
+            $query = "SELECT * FROM horarios ORDER BY hora ASC"; /* temos q adicionar codprof ao horario? ou codhorario a codprof? */
             $result = mysqli_query($con, $query);
             if (!$result)   printf("Erro: %s", mysqli_error($con));
             else {
@@ -159,10 +159,7 @@ if (!isset($_SESSION["codprof"])) {
 
 </div>
 
-
 <?php include "footer.php"; ?>
 
-
 </body>
-
 </html>

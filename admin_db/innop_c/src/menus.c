@@ -165,14 +165,15 @@ void inserir_manualmente()
         format_str(query, "(%s,%s,%s,%s,%s)", c[0], c[1], c[2], c[3], c[4]);
     else if (!strcmp(tabela, "professor"))
         format_str(query,
-                   "(%s,'%s',%s,'%s','%s',%s,'%s',NULL)",
+                   "(%s,'%s',%s,'%s','%s',%s,'%s',NULL, %s)",
                    c[0],
                    c[1],
                    c[2],
                    c[3],
                    c[4],
                    c[5],
-                   c[6]);
+                   c[6],
+                   c[7]);
     else if (!strcmp(tabela, "sumarios"))
         format_str(query,
                    "(%s,%s,%s,'%s',%s,'%s',%s)",

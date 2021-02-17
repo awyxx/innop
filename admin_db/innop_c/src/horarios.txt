@@ -8,5 +8,4 @@ INSERT INTO `horarios` VALUES (1,6,NULL,    'FIO',    'PT',     'PT',     NULL)
 INSERT INTO `horarios` VALUES (1,7,NULL,    'FIO',    'FQ',     'PT',     NULL)
 INSERT INTO `horarios` VALUES (1,8,NULL,    NULL,   NULL,   'FQ',     NULL)
 INSERT INTO `horarios` VALUES (1,9,NULL,    NULL,   NULL,   'FQ',     NULL)
-INSERT INTO `horarios` VALUES (1,10,NULL,   NULL,   NULL,   NULL,   NULL)
 

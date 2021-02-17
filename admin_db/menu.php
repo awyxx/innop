@@ -192,6 +192,47 @@ function campos_tabela($tabela, $con) {
     return $campos;
 }
 
+function exec_query($con, $query) {
+    $result = mysqli_query($con, $query);
+    if (!$result) {
+        printf("Erro: %s", mysqli_error($con));
+        return 0;
+    } else {
+        return 1;
+    }
+}
+
+function inserir_dados($con, $nometabela, $dados) {
+
+    // numero da tabela no vetor query
+    $tab = array("aluno"=>0, "cartao"=>1, "disciplina"=>2, "dt"=>3, "ee"=>4, "faltas"=>5, 
+                    "horarios"=>6, "notas"=>7, "professor"=>8, "sumarios"=>9, "turma"=>10, "turmas"=>11);
+
+    $ntabela = $tab[$nometabela];
+
+    $query = array(
+        "INSERT INTO `aluno`(`codaluno`, `codee`, `nome`, `cc`, `datanasc`, `nacionalidade`, `morada`, `telemovel`, `email`) VALUES ($dados[0],$dados[1],'$dados[2]',$dados[3],'$dados[4]','$dados[5]','$dados[6]',$dados[7],'$dados[8]');",
+        "INSERT INTO `cartao`(`codcartao`,`status`,`saldo`,`img`) VALUES ($dados[0],'$dados[1]','$dados[2]',null);",
+        "INSERT INTO `disciplina`(`coddisciplina`, `nome`, `ano`, `codprof`) VALUES ($dados[0],'$dados[1]',$dados[2],$dados[3]);",
+        "INSERT INTO `dt`(`coddt`, `codprof`, `codturma`, `numaluno`) VALUES ($dados[0],$dados[1],$dados[2],$dados[3]);",
+        "INSERT INTO `ee`(`codee`, `nome`, `parentesco`, `morada`, `telemovel`, `email`) VALUES ($dados[0],'$dados[1]','$dados[2]','$dados[3]',$dados[4],'$dados[5]');",
+        "INSERT INTO `faltas`(`codfalta`, `codaluno`, `datafalta`, `diasemana`, `idxhora`, `coddisciplina`, `tipofalta`) VALUES ($dados[0],$dados[1],$dados[2],$dados[3],$dados[4],$dados[5],'$dados[6]');",
+        "INSERT INTO `horarios`(`codhorario`, `hora`, `seg`, `ter`, `qua`, `qui`, `sex`) VALUES ($dados[0],$dados[1],'$dados[2]','$dados[3]','$dados[4]','$dados[5]','$dados[6]');",
+        "INSERT INTO `notas`(`codaluno`, `coddisciplina`, `nota`, `periodo`, `anoescolar`) VALUES ($dados[0],$dados[1],$dados[2],$dados[3], $dados[4]);",
+        "INSERT INTO `professor`(`codprof`, `nome`, `cc`, `datanasc`, `nacionalidade`, `telemovel`, `email`,`codhorario`) VALUES ($dados[0],'$dados[1]',$dados[2],'$dados[3]','$dados[4]',$dados[5],'$dados[6]',$dados[7]);",
+        "INSERT INTO `sumarios`(`codprof`, `codturma`, `licao`, `sumario`, `hora`, `diasemana`, `coddisciplina`) VALUES ($dados[0],$dados[1],$dados[2],'$dados[3]',$dados[4],'$dados[5]','$dados[6]');",
+        "INSERT INTO `turma`(`codaluno`, `codhorario`, `codturma`, `numaluno`, `cartaluno`) VALUES ($dados[0],$dados[1],$dados[2],$dados[3],$dados[4]);",
+        "INSERT INTO `turmas`(`codturma`, `sigla`, `ano`, `curso`, `coddt`) VALUES ($dados[0],'$dados[1]',$dados[2],'$dados[3]', $dados[4]);",
+    );
+
+    if (exec_query($con, $query[$ntabela])) {
+        //printf("Registo introduzido com sucesso!");
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
 /****** */
 /* MAIN */
 /****** */ 
@@ -244,16 +285,15 @@ if (isset($_POST["concluido_post"])) {
 
     // apagar
     if ($_POST["concluido_post"] == "Apagar") {
-        $query = "DELETE FROM $tabela_ WHERE $campo = $cod";
-        $result = mysqli_query($con, $query);
-        if (!$result)   printf("Erro: %s", mysqli_error($con));
-        else {
+        if (exec_query($con, "DELETE FROM $tabela_ WHERE $campo = $cod")) {
             printf("<h2> Registo apagado com sucesso! </h2> ");
         }
     } 
     // modificar
     else if ($_POST["concluido_post"] == "Modificar") {
-        $tabela = $_SESSION["tabela"];
+        $tabela     = $_SESSION["tabela"];
+        $cod        = $_POST["oldcod"];
+        $campo      = $_POST["oldcodval"];
 
         // array com os dados
         $dados = array("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
@@ -272,7 +312,21 @@ if (isset($_POST["concluido_post"])) {
             printf("<a href='menu.php'> Voltar </a> "); // transformar em botao
             exit;
         }
-        
+
+        // update ta a dar erro, dar fix assim:
+        // damos remove e depois inserimos dnv
+        // mas em tabelas q a chave primaria se repete n funciona :(
+        if ($tabela != "horarios" && $tabela != "turma" && $tabela != "sumarios" && $tabela != "notas") {
+            if (exec_query($con, "DELETE FROM $tabela WHERE $campo = $cod")) {
+                // inserir dados
+                if (inserir_dados($con, $tabela, $dados)) {
+                    printf("Registo modificado com sucesso!");
+                }
+            }
+        }
+        // e agora? como fazemos para as outras? xd
+
+        /*
         // fazer o update (optimizar??? how)
         if ($tabela == "aluno")
             $query_campos =  "`codaluno`=$dados[0],`codee`=$dados[1],`nome`='$dados[2]',`cc`=$dados[3],`datanasc`='$dados[4]',`nacionalidade`='$dados[5]',`morada`='$dados[6]',`telemovel`=$dados[7],`email`='$dados[8]'";
@@ -306,9 +360,8 @@ if (isset($_POST["concluido_post"])) {
         else {
             printf("<h2> Registo modificado com sucesso! </h2>");
         }
-        printf("query: %s ", $query);
+    */
     }
-    
     printf("<a href='menu.php'> Voltar </a> "); // transformar em botao
 }
 
@@ -349,31 +402,8 @@ if (isset($_POST["ins_post_mysql"])) {
         exit;
     }
 
-    // numero da tabela no vetor query
-    $tab = array("aluno"=>0, "cartao"=>1, "disciplina"=>2, "dt"=>3, "ee"=>4, "faltas"=>5, 
-                    "horarios"=>6, "notas"=>7, "professor"=>8, "sumarios"=>9, "turma"=>10, "turmas"=>11);
+    inserir_dados($con, $_SESSION["tabela"], $dados);
 
-    $n_tabela = $tab[$_SESSION["tabela"]];
-
-    $query = array(
-        "INSERT INTO `aluno`(`codaluno`, `codee`, `nome`, `cc`, `datanasc`, `nacionalidade`, `morada`, `telemovel`, `email`,`Imagem`) VALUES ($dados[0],$dados[1],'$dados[2]',$dados[3],'$dados[4]','$dados[5]','$dados[6]',$dados[7],'$dados[8]', null);",
-        "INSERT INTO `cartao`(`codcartao`,`status`,`saldo`,`img`) VALUES ($dados[0],'$dados[1]','$dados[2]',null);",
-        "INSERT INTO `disciplina`(`coddisciplina`, `nome`, `ano`, `codprof`) VALUES ($dados[0],'$dados[1]',$dados[2],$dados[3]);",
-        "INSERT INTO `dt`(`coddt`, `codprof`, `codturma`, `numaluno`) VALUES ($dados[0],$dados[1],$dados[2],$dados[3]);",
-        "INSERT INTO `ee`(`codee`, `nome`, `parentesco`, `morada`, `telemovel`, `email`) VALUES ($dados[0],'$dados[1]','$dados[2]','$dados[3]',$dados[4],'$dados[5]');",
-        "INSERT INTO `faltas`(`codfalta`, `codaluno`, `datafalta`, `diasemana`, `idxhora`, `coddisciplina`, `tipofalta`) VALUES ($dados[0],$dados[1],$dados[2],$dados[3],$dados[4],$dados[5],'$dados[6]');",
-        "INSERT INTO `horarios`(`codhorario`, `hora`, `seg`, `ter`, `qua`, `qui`, `sex`) VALUES ($dados[0],$dados[1],'$dados[2]','$dados[3]','$dados[4]','$dados[5]','$dados[6]');",
-        "INSERT INTO `notas`(`codaluno`, `coddisciplina`, `nota`, `periodo`, `anoescolar`) VALUES ($dados[0],$dados[1],$dados[2],$dados[3], $dados[4]);",
-        "INSERT INTO `professor`(`codprof`, `nome`, `cc`, `datanasc`, `nacionalidade`, `telemovel`, `email`, `img`) VALUES ($dados[0],'$dados[1]',$dados[2],'$dados[3]','$dados[4]',$dados[5],'$dados[6]',null);",
-        "INSERT INTO `sumarios`(`codprof`, `codturma`, `licao`, `sumario`, `hora`, `diasemana`, `coddisciplina`) VALUES ($dados[0],$dados[1],$dados[2],'$dados[3]',$dados[4],'$dados[5]','$dados[6]');",
-        "INSERT INTO `turma`(`codaluno`, `codhorario`, `codturma`, `numaluno`, `cartaluno`) VALUES ($dados[0],$dados[1],$dados[2],$dados[3],$dados[4]);",
-        "INSERT INTO `turmas`(`codturma`, `sigla`, `ano`, `curso`, `coddt`) VALUES ($dados[0],'$dados[1]',$dados[2],'$dados[3]', $dados[4]);",
-    );
-    $result = mysqli_query($con, $query[$n_tabela]);
-    if (!$result)   echo mysqli_error($con);
-    else {
-        printf("Registo introduzido com sucesso!");
-    }
     printf(" <a href='menu.php'> <button class='button' type='button'> Voltar </button> </a> ");
 }
 
