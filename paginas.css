@@ -4,3 +4,33 @@ head, body {
   font-family: 'Roboto', sans-serif;
   margin: 0%;
 }
+
+.uperleft{
+    width: 70%;
+    height: 60%;
+    background-color: white;
+    text-align: justify;
+    margin-left: 5%;
+    padding: 5;
+}
+.fieldsum{
+    height: 40%;
+    width: 95%;
+    background-color: white;
+    margin-left: 2%;
+}
+.buta{
+  height: 25%;
+  width: 35%;
+  color: white;
+  background-color: #17b;
+  font-size: 130%;
+}
+
+.voltar{
+  height: 25%;
+  width: 35%;
+  color: white;
+  background-color: lightskyblue;
+  font-size: 130%;
+}

@@ -54,6 +54,7 @@
             <select name='disciplina' onchange='this.form.submit()'>");
                 $codprof    = $_SESSION["codprof"];
                 $disciplina = $_SESSION["nomedisciplina"];
+                $codturma   = codturma($con, $_SESSION["turma"][3], $_SESSION["turma"][0].$_SESSION["turma"][1]);
                 $query = "SELECT nome FROM disciplina WHERE codprof = $codprof";
                 $result = mysqli_query($con, $query);
                 printf("<option selected disabled hidden> %s </option>", $disciplina); 
@@ -65,13 +66,14 @@
     // menu dropdown com os sumarios/licoes do stor
     function select_licoes($con) {
         printf("Lição:
-        <form id='formtest' method='post'>
+        <form style='background-color:lightblue' id='formtest' method='post'>
             <select name='licao' onchange='this.form.submit()'>");
                 $codprof        = $_SESSION["codprof"];
                 $disciplina     = $_SESSION["nomedisciplina"];
                 $licao          = $_SESSION["licao"];
+                $codturma   = codturma($con, $_SESSION["turma"][3], $_SESSION["turma"][0].$_SESSION["turma"][1]);
                 $coddisciplina  = coddisciplina($con, $disciplina, $codprof);
-                $query = "SELECT licao FROM sumarios WHERE codprof = $codprof AND coddisciplina = $coddisciplina;"; 
+                $query = "SELECT licao FROM sumarios WHERE codprof = $codprof AND coddisciplina = $coddisciplina and codturma = $codturma;"; 
                 $result = mysqli_query($con, $query);
                 printf("<option selected disabled hidden> %s </option>", $licao);
                 while ($row = mysqli_fetch_row($result))
@@ -107,6 +109,7 @@
     */
 
     // select com todas as turmas
+    printf("<div class='uperleft'>");
     select_turma($con);
 
     if (isset($_POST["turma"])) {
@@ -144,11 +147,11 @@
             // ir buscar data de hoje php
             printf("
             <form method='post'>
-                <fieldset>
+                <fieldset class=fieldsum>
                 <legend> %s - %s - Lição %d - Data: %s </legend>
-                    <input type='text' id='sumario_' name='sumario_' value=''>  <br><br> 
-                    <input name='novo_sumario_post' type='submit' value='Introduzir novo sumário'>
-                    <input type='reset' value='Apagar'>
+                    <textarea name='sumario_' value='' cols='50' rows='10' style='height:100%%;width:100%%'></textarea> <br><br> 
+                    <input class='buta' name='novo_sumario_post' type='submit' value='Introduzir novo sumário'>
+                    <input class='buta' type='reset' value='Apagar'>
                 </fieldset>
             </form>
             ", $_SESSION["turma"], $_SESSION["nomedisciplina"], $licao, "oi", "test");
@@ -196,14 +199,21 @@
                         VALUES ($codprof,$codturma,$licao,'$sumario','$hora','$dia',$coddisciplina)";
     
         printf("queryzona: %s", $query);
+
+
+        
         //fazr query ez pz
         $result = mysqli_query($con, $query);
         if(!$result)    
             printf("<br> Erro estranho, sumario nao introduzido: %s", mysqli_error($con));
-        // sumario introduzido com sucesso!
+
+  
+            // sumario introduzido com sucesso!
         
         // reload à pagina?
     }
+
+    printf("</div>");
 
     ?>
     

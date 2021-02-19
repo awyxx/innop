@@ -50,12 +50,12 @@
         document.write("<img style='height:20%' src='../imagens/innoplus_icon_branco.png'>");
         document.write("<br><br>");
         document.write("<fieldset style=' background: rgba(20, 55, 55, .5); width:40%; text-align:justify; font-family: Roboto, sans-serif;'>");
-        document.write("<img src='../imagens/lapiz.png' width=50% style='float:right'>");
-        document.write("<table style='background-color:ligghblue; color:white; font-size:130%;'>");
             document.write("<input name='oldcodval' readonly type='hidden' value='",campo_principal,"'>");
             document.write("<input name='oldcod' readonly type='hidden' value='", valores[0],"'>");
             // modificar
             if (element.value == "Modificar") {
+                document.write("<img src='../imagens/lapiz.png' width=50% style='float:right'>");
+                document.write("<table style='color:white; font-size:130%;'>");
                 for (var i = 0; i < n-1; i++)
                 {
                     document.write("<tr>");
@@ -75,9 +75,23 @@
                                                                                              
             // apagar
             else if (element.value == "Remover") {
+                document.write("<img src='../imagens/apagar.png' width=50% style='float:right'>");
+                document.write("<table style='color:white; font-size:130%;'>");
                 for (var i = 0; i < n-1; i++)
-                    document.write(campos[i], "<input disabled type='text' value='",valores[i],"'> <br>");
-                document.write("<input name='concluido_post' type='submit' value='Apagar'>");
+                {
+                    document.write("<tr>");
+                    document.write("<td>",campos[i], "</td> <td> <input disabled type='text' value='",valores[i],"'> </td>");
+                    document.write("</tr>");
+                }
+
+                document.write("<tr> <td colspan='2'> <hr style='border:10px solid rgba(20, 55, 55, .0)'> </td> </tr>");
+
+                document.write("<tr>");
+                document.write("<td colspan='2'> <input style='height:100%;width:100%;background-color:rgb(255,102,102);font-size:90%' name='concluido_post' type='submit' value='Apagar'> </td>");
+                document.write("</tr>");
+                document.write("<tr>");
+                document.write("<td colspan='2'> <a href='menu.php'> <input style='height:100%;width:100%;background-color:White;font-size:90%' name='Insert_Ad' type='button' value='Voltar'> </a> </td> "); // transformar em botao
+                document.write("</tr>");
             }
         document.write("</table>");
         document.write("</fieldset>")
@@ -195,7 +209,11 @@ function campos_tabela($tabela, $con) {
 function exec_query($con, $query) {
     $result = mysqli_query($con, $query);
     if (!$result) {
-        printf("Erro: %s", mysqli_error($con));
+        printf("<center>");
+        printf("<h1> Registo Não Inserido! </h1>");
+        printf("<img src='../imagens/cc.png' height='30%%'>");
+        printf("<p style='color:white'> Erro: ( %s )", mysqli_error($con),"<p> <br>");
+        printf("</center>");
         return 0;
     } else {
         return 1;
@@ -219,14 +237,13 @@ function inserir_dados($con, $nometabela, $dados) {
         "INSERT INTO `faltas`(`codfalta`, `codaluno`, `datafalta`, `diasemana`, `idxhora`, `coddisciplina`, `tipofalta`) VALUES ($dados[0],$dados[1],$dados[2],$dados[3],$dados[4],$dados[5],'$dados[6]');",
         "INSERT INTO `horarios`(`codhorario`, `hora`, `seg`, `ter`, `qua`, `qui`, `sex`) VALUES ($dados[0],$dados[1],'$dados[2]','$dados[3]','$dados[4]','$dados[5]','$dados[6]');",
         "INSERT INTO `notas`(`codaluno`, `coddisciplina`, `nota`, `periodo`, `anoescolar`) VALUES ($dados[0],$dados[1],$dados[2],$dados[3], $dados[4]);",
-        "INSERT INTO `professor`(`codprof`, `nome`, `cc`, `datanasc`, `nacionalidade`, `telemovel`, `email`,`codhorario`) VALUES ($dados[0],'$dados[1]',$dados[2],'$dados[3]','$dados[4]',$dados[5],'$dados[6]',$dados[7]);",
+        "INSERT INTO `professor`(`codprof`,`codhorario`, `nome`, `cc`, `datanasc`, `nacionalidade`, `telemovel`, `email`) VALUES ($dados[0],'$dados[1]',$dados[2],'$dados[3]','$dados[4]',$dados[5],'$dados[6]',$dados[7]);",
         "INSERT INTO `sumarios`(`codprof`, `codturma`, `licao`, `sumario`, `hora`, `diasemana`, `coddisciplina`) VALUES ($dados[0],$dados[1],$dados[2],'$dados[3]',$dados[4],'$dados[5]','$dados[6]');",
         "INSERT INTO `turma`(`codaluno`, `codhorario`, `codturma`, `numaluno`, `cartaluno`) VALUES ($dados[0],$dados[1],$dados[2],$dados[3],$dados[4]);",
         "INSERT INTO `turmas`(`codturma`, `sigla`, `ano`, `curso`, `coddt`) VALUES ($dados[0],'$dados[1]',$dados[2],'$dados[3]', $dados[4]);",
     );
 
     if (exec_query($con, $query[$ntabela])) {
-        //printf("Registo introduzido com sucesso!");
         return 1;
     } else {
         return 0;
@@ -286,7 +303,10 @@ if (isset($_POST["concluido_post"])) {
     // apagar
     if ($_POST["concluido_post"] == "Apagar") {
         if (exec_query($con, "DELETE FROM $tabela_ WHERE $campo = $cod")) {
-            printf("<h2> Registo apagado com sucesso! </h2> ");
+            printf("<center>");
+            printf("<h1> Registo Apagado com sucesso! </h1>");
+            printf("<img src='../imagens/ss.png' height='30%%'>");
+            printf("</center>");
         }
     } 
     // modificar
@@ -308,8 +328,11 @@ if (isset($_POST["concluido_post"])) {
         }
 
         if ($erro) {
-            printf("Erro! Valores nulos.");
-            printf("<a href='menu.php'> Voltar </a> "); // transformar em botao
+            printf("<center>");
+            printf("<img src='../imagens/cc.png' height='30%%'>");
+            printf("<p style='color:white'> Erro! Valores nulos. <p>");
+            printf("<a href='menu.php'> <button class='button' type='button'> Voltar </button> </a>");
+            printf("</center>");
             exit;
         }
 
@@ -320,7 +343,10 @@ if (isset($_POST["concluido_post"])) {
             if (exec_query($con, "DELETE FROM $tabela WHERE $campo = $cod")) {
                 // inserir dados
                 if (inserir_dados($con, $tabela, $dados)) {
-                    printf("Registo modificado com sucesso!");
+                    printf("<center>");
+                    printf("<h1> Registo introduzido com sucesso! </h1>");
+                    printf("<img src='../imagens/ss.png' height='30%%'>");
+                    printf("</center>");
                 }
             }
         }
@@ -362,7 +388,9 @@ if (isset($_POST["concluido_post"])) {
         }
     */
     }
-    printf("<a href='menu.php'> Voltar </a> "); // transformar em botao
+    printf("<center>");
+    printf("<a href='menu.php'> <button class='button' type='button'> Voltar </button> </a>");
+    printf("</center>");
 }
 
 // pedir campos da tabela para depois mandarmos pa outro post pa inserir
@@ -371,14 +399,46 @@ if (isset($_POST["inserir_post"])) {
     $result = mysqli_query($con, $query);
     $x = 0;
     printf("<h1> Inserir dados na tabela '%s' </h1>", $_SESSION["tabela"]);
-    printf("<form method='post'>");
+
+        // Erros em printf? ..... (arranja se quiseres) - cortei o php
+
+    
+    printf("<form id='forminserir' method='post'>");                         // form inserir
+
+    ?> 
+    <center>
+    <fieldset  style='background: rgba(20, 55, 55, .5); width:40%; text-align:justify; font-family: Roboto, sans-serif;'> 
+    <img src='../imagens/inserir.png' width=50% style='float:right'>
+    <table style='color:white; font-size:130%;border: 0px;'>
+    <?php
+
         while ($row1 = mysqli_fetch_row($result)) {
             if ($row1[0] == 'img')  continue;
-            printf("%s: <input name='tb%d' type='text'> <br>", $row1[0], $x);
+            {
+                printf("<tr>");
+                printf("<td style='border: 0px;'> %s: </td> <td style='border: 0px;'> <input name='tb%d' type='text'> </td>", $row1[0], $x);
+                printf("</tr>");
+            }
             $x++;
         }
-        printf("<input name='ins_post_mysql' type='submit' value='Inserir'>");
+    
+    ?>
+    
+    <tr> <td colspan='2' style='border: 0px;'> <hr class='separador' style='border:10px solid rgba(20, 55, 55, .0)'> </td> </tr>
+
+    <tr>
+    <td colspan='2' style='border: 0px;'> <input name='ins_post_mysql' type='submit' value='Inserir' style='height:100%;width:100%;background-color:rgb(102,255,102);font-size:90%';> </td>
+    </tr>
+    <tr>
+    <td colspan='2' style='border: 0px;'> <a href='menu.php'> <input style='height:100%;width:100%;background-color:White;font-size:90%' name='Insert_Ad' type='button' value='Voltar'> </a> </td>
+    </tr>
+
+
+    <?php
+    printf("</table>");
     printf("</form>");
+    printf("</fieldset>");
+    printf("</center>");
 }
 
 // post recebe dados das input boxes e manda pa base de dados
@@ -397,14 +457,20 @@ if (isset($_POST["ins_post_mysql"])) {
     }
 
     if ($erro) {
-        printf("Erro! Valores nulos. <br>");
+        printf("<center>");
+        printf("<img src='../imagens/cc.png' height='30%%'>");
+        printf("<p style='color:white'> Erro! Valores nulos. </p> <br>");
         printf("<a href='menu.php'> <button class='button' type='button'> Voltar </button> </a>");
+        printf("</center>");
         exit;
     }
 
     inserir_dados($con, $_SESSION["tabela"], $dados);
-
-    printf(" <a href='menu.php'> <button class='button' type='button'> Voltar </button> </a> ");
+    printf("<center>");
+    printf("<h1> Registo introduzido com sucesso! </h1>");
+    printf("<img src='../imagens/ss.png' height='30%%'>");
+    printf("<a href='menu.php'> <button class='button' type='button'> Voltar </button> </a>");
+    printf("</center>");
 }
 
 ?>
