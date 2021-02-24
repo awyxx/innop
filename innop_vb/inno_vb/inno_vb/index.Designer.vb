@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class index
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,12 +20,14 @@ Partial Class index
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.panelDados = New System.Windows.Forms.Panel()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.picboxImg = New System.Windows.Forms.PictureBox()
         Me.lblCodCartao = New System.Windows.Forms.Label()
         Me.lblStatus = New System.Windows.Forms.Label()
         Me.lblSaldo = New System.Windows.Forms.Label()
@@ -35,6 +37,7 @@ Partial Class index
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.panelSumarios = New System.Windows.Forms.Panel()
+        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -45,7 +48,6 @@ Partial Class index
         Me.cbLicao = New System.Windows.Forms.ComboBox()
         Me.cbDisciplina = New System.Windows.Forms.ComboBox()
         Me.cbTurma = New System.Windows.Forms.ComboBox()
-        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.panelPagInicial = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.lblTurmaDt = New System.Windows.Forms.Label()
@@ -66,21 +68,27 @@ Partial Class index
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Button4 = New System.Windows.Forms.Button()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.picboxImg = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.panelFaltas = New System.Windows.Forms.Panel()
+        Me.titulo = New System.Windows.Forms.Label()
+        Me.ListBox1 = New System.Windows.Forms.ListBox()
+        Me.Button9 = New System.Windows.Forms.Button()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.panelDados.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picboxImg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panelSumarios.SuspendLayout()
-        Me.gbSumario.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.gbSumario.SuspendLayout()
         Me.panelPagInicial.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.panelPagInicialHorario.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panelPagInicialInfo.SuspendLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picboxImg, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.panelFaltas.SuspendLayout()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Button1
@@ -139,6 +147,25 @@ Partial Class index
         Me.panelDados.Name = "panelDados"
         Me.panelDados.Size = New System.Drawing.Size(374, 81)
         Me.panelDados.TabIndex = 4
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = Global.inno_vb.My.Resources.Resources.logout
+        Me.PictureBox2.Location = New System.Drawing.Point(256, 51)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(28, 26)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox2.TabIndex = 9
+        Me.PictureBox2.TabStop = False
+        '
+        'picboxImg
+        '
+        Me.picboxImg.Location = New System.Drawing.Point(290, 3)
+        Me.picboxImg.Name = "picboxImg"
+        Me.picboxImg.Size = New System.Drawing.Size(81, 74)
+        Me.picboxImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.picboxImg.TabIndex = 8
+        Me.picboxImg.TabStop = False
         '
         'lblCodCartao
         '
@@ -233,49 +260,57 @@ Partial Class index
         Me.panelSumarios.Controls.Add(Me.PictureBox3)
         Me.panelSumarios.Controls.Add(Me.Button8)
         Me.panelSumarios.Controls.Add(Me.Button7)
-        Me.panelSumarios.Controls.Add(Me.Label13)
-        Me.panelSumarios.Controls.Add(Me.Label12)
-        Me.panelSumarios.Controls.Add(Me.Label11)
         Me.panelSumarios.Controls.Add(Me.gbSumario)
-        Me.panelSumarios.Controls.Add(Me.cbLicao)
-        Me.panelSumarios.Controls.Add(Me.cbDisciplina)
-        Me.panelSumarios.Controls.Add(Me.cbTurma)
-        Me.panelSumarios.Location = New System.Drawing.Point(6, 90)
+        Me.panelSumarios.Location = New System.Drawing.Point(15, 293)
         Me.panelSumarios.Name = "panelSumarios"
-        Me.panelSumarios.Size = New System.Drawing.Size(1105, 529)
+        Me.panelSumarios.Size = New System.Drawing.Size(481, 317)
         Me.panelSumarios.TabIndex = 6
+        '
+        'PictureBox3
+        '
+        Me.PictureBox3.Image = Global.inno_vb.My.Resources.Resources._1787230
+        Me.PictureBox3.Location = New System.Drawing.Point(714, 99)
+        Me.PictureBox3.Name = "PictureBox3"
+        Me.PictureBox3.Size = New System.Drawing.Size(240, 266)
+        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox3.TabIndex = 9
+        Me.PictureBox3.TabStop = False
         '
         'Button8
         '
         Me.Button8.BackColor = System.Drawing.Color.White
+        Me.Button8.Enabled = False
         Me.Button8.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button8.Font = New System.Drawing.Font("Gotham Black", 12.25!, System.Drawing.FontStyle.Bold)
         Me.Button8.ForeColor = System.Drawing.SystemColors.MenuHighlight
-        Me.Button8.Location = New System.Drawing.Point(251, 430)
+        Me.Button8.Location = New System.Drawing.Point(245, 247)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(216, 59)
         Me.Button8.TabIndex = 8
         Me.Button8.Text = "Limpar"
         Me.Button8.UseVisualStyleBackColor = False
+        Me.Button8.Visible = False
         '
         'Button7
         '
         Me.Button7.BackColor = System.Drawing.Color.White
+        Me.Button7.Enabled = False
         Me.Button7.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.Button7.Font = New System.Drawing.Font("Gotham Black", 12.25!, System.Drawing.FontStyle.Bold)
         Me.Button7.ForeColor = System.Drawing.SystemColors.MenuHighlight
-        Me.Button7.Location = New System.Drawing.Point(15, 430)
+        Me.Button7.Location = New System.Drawing.Point(9, 247)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(216, 59)
         Me.Button7.TabIndex = 7
         Me.Button7.Text = "Introduzir sumário"
         Me.Button7.UseVisualStyleBackColor = False
+        Me.Button7.Visible = False
         '
         'Label13
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Gotham Black", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(6, 122)
+        Me.Label13.Location = New System.Drawing.Point(12, 238)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(53, 17)
         Me.Label13.TabIndex = 7
@@ -285,7 +320,7 @@ Partial Class index
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Gotham Black", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(6, 66)
+        Me.Label12.Location = New System.Drawing.Point(12, 182)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(85, 17)
         Me.Label12.TabIndex = 6
@@ -295,7 +330,7 @@ Partial Class index
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Gotham Black", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(6, 13)
+        Me.Label11.Location = New System.Drawing.Point(12, 129)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(62, 17)
         Me.Label11.TabIndex = 5
@@ -305,7 +340,7 @@ Partial Class index
         '
         Me.gbSumario.Controls.Add(Me.textboxSumario)
         Me.gbSumario.Font = New System.Drawing.Font("Gotham Black", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.gbSumario.Location = New System.Drawing.Point(9, 190)
+        Me.gbSumario.Location = New System.Drawing.Point(3, 7)
         Me.gbSumario.Name = "gbSumario"
         Me.gbSumario.Size = New System.Drawing.Size(464, 234)
         Me.gbSumario.TabIndex = 4
@@ -324,7 +359,7 @@ Partial Class index
         'cbLicao
         '
         Me.cbLicao.FormattingEnabled = True
-        Me.cbLicao.Location = New System.Drawing.Point(41, 142)
+        Me.cbLicao.Location = New System.Drawing.Point(47, 258)
         Me.cbLicao.Name = "cbLicao"
         Me.cbLicao.Size = New System.Drawing.Size(123, 21)
         Me.cbLicao.TabIndex = 2
@@ -332,7 +367,7 @@ Partial Class index
         'cbDisciplina
         '
         Me.cbDisciplina.FormattingEnabled = True
-        Me.cbDisciplina.Location = New System.Drawing.Point(41, 86)
+        Me.cbDisciplina.Location = New System.Drawing.Point(47, 202)
         Me.cbDisciplina.Name = "cbDisciplina"
         Me.cbDisciplina.Size = New System.Drawing.Size(123, 21)
         Me.cbDisciplina.TabIndex = 1
@@ -340,20 +375,10 @@ Partial Class index
         'cbTurma
         '
         Me.cbTurma.FormattingEnabled = True
-        Me.cbTurma.Location = New System.Drawing.Point(41, 33)
+        Me.cbTurma.Location = New System.Drawing.Point(47, 149)
         Me.cbTurma.Name = "cbTurma"
         Me.cbTurma.Size = New System.Drawing.Size(123, 21)
         Me.cbTurma.TabIndex = 0
-        '
-        'PictureBox3
-        '
-        Me.PictureBox3.Image = Global.inno_vb.My.Resources.Resources._1787230
-        Me.PictureBox3.Location = New System.Drawing.Point(714, 99)
-        Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(240, 266)
-        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox3.TabIndex = 9
-        Me.PictureBox3.TabStop = False
         '
         'panelPagInicial
         '
@@ -582,25 +607,6 @@ Partial Class index
         Me.Button4.Text = "Informações pessoais"
         Me.Button4.UseVisualStyleBackColor = False
         '
-        'PictureBox2
-        '
-        Me.PictureBox2.Image = Global.inno_vb.My.Resources.Resources.logout
-        Me.PictureBox2.Location = New System.Drawing.Point(256, 51)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(28, 26)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox2.TabIndex = 9
-        Me.PictureBox2.TabStop = False
-        '
-        'picboxImg
-        '
-        Me.picboxImg.Location = New System.Drawing.Point(290, 3)
-        Me.picboxImg.Name = "picboxImg"
-        Me.picboxImg.Size = New System.Drawing.Size(81, 74)
-        Me.picboxImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.picboxImg.TabIndex = 8
-        Me.picboxImg.TabStop = False
-        '
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.inno_vb.My.Resources.Resources.innoplus_icon
@@ -611,29 +617,104 @@ Partial Class index
         Me.PictureBox1.TabIndex = 0
         Me.PictureBox1.TabStop = False
         '
+        'panelFaltas
+        '
+        Me.panelFaltas.Controls.Add(Me.Label14)
+        Me.panelFaltas.Controls.Add(Me.Button9)
+        Me.panelFaltas.Controls.Add(Me.ListBox1)
+        Me.panelFaltas.Location = New System.Drawing.Point(530, 293)
+        Me.panelFaltas.Name = "panelFaltas"
+        Me.panelFaltas.Size = New System.Drawing.Size(528, 317)
+        Me.panelFaltas.TabIndex = 7
+        '
+        'titulo
+        '
+        Me.titulo.AutoSize = True
+        Me.titulo.Font = New System.Drawing.Font("Gotham Black", 15.25!, System.Drawing.FontStyle.Bold)
+        Me.titulo.Location = New System.Drawing.Point(8, 87)
+        Me.titulo.Name = "titulo"
+        Me.titulo.Size = New System.Drawing.Size(67, 24)
+        Me.titulo.TabIndex = 8
+        Me.titulo.Text = "titulo"
+        '
+        'ListBox1
+        '
+        Me.ListBox1.Font = New System.Drawing.Font("Gotham Black", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.ListBox1.FormattingEnabled = True
+        Me.ListBox1.ItemHeight = 17
+        Me.ListBox1.Location = New System.Drawing.Point(3, 29)
+        Me.ListBox1.Name = "ListBox1"
+        Me.ListBox1.Size = New System.Drawing.Size(513, 208)
+        Me.ListBox1.TabIndex = 0
+        '
+        'Button9
+        '
+        Me.Button9.BackColor = System.Drawing.Color.White
+        Me.Button9.Enabled = False
+        Me.Button9.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button9.Font = New System.Drawing.Font("Gotham Black", 12.25!, System.Drawing.FontStyle.Bold)
+        Me.Button9.ForeColor = System.Drawing.SystemColors.MenuHighlight
+        Me.Button9.Location = New System.Drawing.Point(3, 247)
+        Me.Button9.Name = "Button9"
+        Me.Button9.Size = New System.Drawing.Size(216, 59)
+        Me.Button9.TabIndex = 8
+        Me.Button9.Text = "Marcar falta"
+        Me.Button9.UseVisualStyleBackColor = False
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Gotham Black", 12.25!, System.Drawing.FontStyle.Bold)
+        Me.Label14.Location = New System.Drawing.Point(3, 7)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(166, 19)
+        Me.Label14.TabIndex = 9
+        Me.Label14.Text = "Selecione o aluno."
+        '
+        'PictureBox4
+        '
+        Me.PictureBox4.Image = Global.inno_vb.My.Resources.Resources._1787230
+        Me.PictureBox4.Location = New System.Drawing.Point(350, 129)
+        Me.PictureBox4.Name = "PictureBox4"
+        Me.PictureBox4.Size = New System.Drawing.Size(146, 150)
+        Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox4.TabIndex = 9
+        Me.PictureBox4.TabStop = False
+        Me.PictureBox4.Visible = False
+        '
         'index
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.ClientSize = New System.Drawing.Size(1114, 622)
+        Me.Controls.Add(Me.PictureBox4)
+        Me.Controls.Add(Me.titulo)
+        Me.Controls.Add(Me.panelFaltas)
         Me.Controls.Add(Me.panelSumarios)
         Me.Controls.Add(Me.panelPagInicial)
+        Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.panelDados)
+        Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.cbLicao)
         Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.cbDisciplina)
         Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.cbTurma)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "index"
         Me.Text = "INNOP"
         Me.panelDados.ResumeLayout(False)
         Me.panelDados.PerformLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picboxImg, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panelSumarios.ResumeLayout(False)
-        Me.panelSumarios.PerformLayout()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.gbSumario.ResumeLayout(False)
         Me.gbSumario.PerformLayout()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panelPagInicial.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
@@ -641,10 +722,12 @@ Partial Class index
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panelPagInicialInfo.ResumeLayout(False)
         Me.panelPagInicialInfo.PerformLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picboxImg, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.panelFaltas.ResumeLayout(False)
+        Me.panelFaltas.PerformLayout()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -695,4 +778,10 @@ Partial Class index
     Friend WithEvents Button8 As Button
     Friend WithEvents Button7 As Button
     Friend WithEvents PictureBox3 As PictureBox
+    Friend WithEvents panelFaltas As Panel
+    Friend WithEvents titulo As Label
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Button9 As Button
+    Friend WithEvents ListBox1 As ListBox
+    Friend WithEvents PictureBox4 As PictureBox
 End Class

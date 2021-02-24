@@ -17,7 +17,7 @@ Module utils
     End Function
 
 
-    '' retorna true se o resultado da query nao for nulo
+    '' retorna true se o resultado da query nao for nulo (as vzs xddd)
     Function is_result_not_null(ByRef con As MySqlConnection, ByVal query As String) As Boolean
 
         Dim cmd = New MySqlCommand(query, con)
@@ -176,7 +176,8 @@ Module utils
 
         Try
             '' preencher
-            Dim sql As String = "SELECT * FROM horarios ORDER BY hora ASC"
+            Dim codhorario = get_codhorario()
+            Dim sql As String = "SELECT hora, seg, ter, qua, qui, sex FROM horarios INNER JOIN professor ON horarios.codhorario = professor.codhorario WHERE professor.codhorario = '" & codhorario & "' AND professor.codprof = '" & g.np & "' ORDER BY hora ASC"
             Dim cmd As MySqlCommand = New MySqlCommand(sql, con)
             Dim da As New MySqlDataAdapter(cmd)
             Dim dt As DataTable = New DataTable
@@ -200,7 +201,6 @@ Module utils
             index.DataGridView1.ColumnHeadersDefaultCellStyle.Font = New Font("Gotham Black", 14)
             index.DataGridView1.RowHeadersDefaultCellStyle.Font = New Font("Gotham Black", 14)
 
-            index.DataGridView1.Columns.RemoveAt(0) ' remover o cod horario pq n é pa mostra-lo
             index.DataGridView1.Columns.RemoveAt(0) ' remover a hora tmb (dar fix doutra maneira???)
 
         Catch ex As Exception
@@ -211,6 +211,7 @@ Module utils
         con.Close()
         Return True
     End Function
+
 
     ' da return da quantidade de turma q temos
     Function get_quant_turmas() As Integer
@@ -447,6 +448,98 @@ Module utils
     End Function
 
 
+    ' marca falta
+    Function inserir_falta() As Boolean
+        con.Open()
+
+        Try
+            Dim turma As String = index.cbTurma.SelectedItem
+            Dim aluno As String = index.ListBox1.SelectedItem
+            Dim codaluno = aluno(0) & aluno(1) & aluno(2) & aluno(3)
+            Dim coddisci = get_coddisciplina(turma(0) & turma(1), index.cbDisciplina.SelectedItem)
+
+            Dim tipo_falta = InputBox("Tipo de falta (presença, material, pontualidade):", "INNOP - TIPO DE FALTA")
+
+            If tipo_falta = "" Or tipo_falta = " " Then
+                Return False
+            End If
+
+            Dim query = "INSERT INTO `faltas`(`codfalta`, `codaluno`, `datafalta`, `diasemana`, `idxhora`, `coddisciplina`, `tipofalta`) VALUES (NULL, '" & codaluno & "', CURRENT_DATE(), DAYOFWEEK(CURRENT_DATE()), CURRENT_TIME(), '" & coddisci & "','" & tipo_falta & "')"
+            Dim cmd As MySqlCommand = New MySqlCommand(query, con)
+            Dim da As New MySqlDataAdapter(cmd)
+            Dim dt As DataTable = New DataTable
+            da.Fill(dt)
+
+        Catch ex As Exception
+            MsgBox("ERRO [inserir_falta()]: " & ex.Message, vbCritical)
+            con.Close()
+            Return False
+        End Try
+
+
+        Return True
+        con.Close()
+
+    End Function
+
+    ' busca sumario
+    Function get_turma_toda() As Boolean
+        con.Open()
+
+        Try
+            Dim turma As String = index.cbTurma.SelectedItem
+            Dim coddisci = get_coddisciplina(turma(0) & turma(1), index.cbDisciplina.SelectedItem)
+            Dim codturma = get_codturma(turma(0) & turma(1), turma(5))
+            Dim licao = index.cbLicao.SelectedItem
+
+            'SELECT turma.numaluno, aluno.nome, turma.codaluno, aluno.nacionalidade, aluno.telemovel, aluno.email FROM turma INNER JOIN aluno 
+            'On turma.numaluno = aluno.codaluno WHERE turma.codturma = $codturma
+
+            Dim query As String = "SELECT turma.numaluno, aluno.nome, turma.codaluno, aluno.nacionalidade, aluno.telemovel, aluno.email FROM turma INNER JOIN aluno On turma.numaluno = aluno.codaluno WHERE turma.codturma ='" & codturma & "' ORDER BY turma.codaluno"
+            Dim cmd As MySqlCommand = New MySqlCommand(query, con)
+            Dim da As New MySqlDataAdapter(cmd)
+            Dim dt As DataTable = New DataTable
+            da.Fill(dt)
+
+            For i As Integer = 0 To get_quant_alunos(codturma) - 1 Step 1
+                Dim aluno = dt(i)(0) & " - " & dt(i)(1) & " - " & dt(i)(3) & " - " & dt(i)(4) & " - " & dt(i)(5)
+                index.ListBox1.Items.Add(aluno)
+            Next
+
+        Catch ex As Exception
+            MsgBox("ERRO [get_turma_toda()]: " & ex.Message, vbCritical)
+            con.Close()
+            Return False
+        End Try
+
+        con.Close()
+        Return True
+    End Function
+
+
+    'return ao n de alunos de uma turma
+    Function get_quant_alunos(ByVal codturma As Integer)
+        con.Open()
+
+        Dim query As String = "SELECT COUNT(codaluno) FROM turma WHERE codturma = '" & codturma & "'"
+        Try
+            If is_result_not_null(con, query) Then
+                Dim cmd As MySqlCommand = New MySqlCommand(query, con)
+                Dim adapter As New MySqlDataAdapter(cmd)
+                Dim n As DataTable = New DataTable()
+                adapter.Fill(n)
+                Return n(0)(0)
+            End If
+        Catch ex As Exception
+            MsgBox("ERRO [get_quant_alunos()]: " & ex.Message, vbCritical)
+            con.Close()
+            Return 0
+        End Try
+        con.Close()
+
+    End Function
+
+
     ' introduzir sumario
     Function insert_sumario() As Boolean
         ' INSERT INTO `sumarios`(`codprof`, `codturma`, `licao`, `sumario`, `hora`, `diasemana`, `coddisciplina`) VALUES($codprof,$codturma,$licao,'$sumario',CURTIME(),CURDATE(),$coddisciplina)
@@ -496,7 +589,7 @@ Module utils
     End Function
 
 
-    ' da return ao numero de turmas existentes na tabela depenendo do stor e do ano da turma selecionada
+    ' da return ao numero max de disciplinas
     Function get_disciplinas_count(ByVal np As Integer, ByVal ano As String) As Integer
         Dim query As String = "SELECT COUNT(coddisciplina) FROM disciplina WHERE codprof = '" & np & "' AND ano = '" & ano & "'"
         Try
@@ -528,6 +621,25 @@ Module utils
             End If
         Catch ex As Exception
             MsgBox("ERRO [get_coddisciplina()]: " & ex.Message, vbCritical)
+            Return 0
+        End Try
+    End Function
+
+
+    'return ao cod horario do stor logado
+    Function get_codhorario() As Integer
+        Dim query As String = "SELECT codhorario FROM professor WHERE codprof = '" & g.np & "' "
+        Try
+            If is_result_not_null(con, query) Then
+                Dim cmd As MySqlCommand = New MySqlCommand(query, con)
+                Dim adapter As New MySqlDataAdapter(cmd)
+                Dim n As DataTable = New DataTable()
+                adapter.Fill(n)
+                con.Close()
+                Return n(0)(0)
+            End If
+        Catch ex As Exception
+            MsgBox("ERRO [get_codhorario()]: " & ex.Message, vbCritical)
             Return 0
         End Try
     End Function
