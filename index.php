@@ -132,10 +132,44 @@ if (!isset($_SESSION["codprof"])) {
         
         <div class="esq">
             <div class="tab">
-                teste
+                Informação escolar
             </div>
             <div class="desc">
-                teste
+            <div class="infocontainer">
+                <?php
+                    // sua turma (dt)
+                    $query = "SELECT codturma, sigla, ano, curso, nome FROM turmas INNER JOIN (dt INNER JOIN professor ON dt.codprof = professor.codprof) ON turmas.coddt = dt.coddt WHERE professor.codprof = '$codprof'";
+                    $result = mysqli_query($con, $query);
+                    if (!$result)   printf("Erro: %s", mysqli_error($con));
+                    else {
+                        $row = mysqli_fetch_row($result);
+                        printf("<b> &emsp; Sua turma: </b> &emsp; [%sº%s] - %s", $row[2], $row[1], $row[3]);
+                    }
+                ?>
+            </div>
+
+            <div class="infocontainer">
+                <?php
+                    function get_disciplina($con, $cod) {
+                        $query = "SELECT nome FROM disciplina WHERE coddisciplina = $cod";
+                        $result_sum = mysqli_query($con, $query);
+                        if (!$result_sum)   printf("Erro get_disciplina: %s", mysqli_error($con));
+                        else {
+                            $row = mysqli_fetch_row($result_sum);
+                            return $row[0];
+                        }
+                    }
+
+                    // sua turma (dt)
+                    $query_sum = "SELECT coddisciplina, licao, sumario FROM sumarios WHERE codprof = '$codprof' ORDER BY diasemana DESC";
+                    $result_sum = mysqli_query($con, $query_sum);
+                    if (!$result_sum)   printf("Erro: %s", mysqli_error($con));
+                    else {
+                        $row = mysqli_fetch_row($result_sum);
+                        printf("&emsp; <b> Ultimo sumário:  </b> [%s] - Lição %s - %s", get_disciplina($con, $row[0]), $row[1], $row[2]);
+                    }
+                ?>
+            </div>
             </div>
         </div>
         </div>

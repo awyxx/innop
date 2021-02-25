@@ -17,7 +17,14 @@
 </head>
 
 <body> 
-    <?php include "navbar.php"; ?>
+
+    <?php include "navbar.php";
+    session_start();
+    if (!isset($_SESSION["codprof"])) { 
+        header("Location: login/formlogin.php"); 
+        exit; 
+    }
+    ?>
 
     <?php 
 
@@ -55,7 +62,8 @@
                 $codprof    = $_SESSION["codprof"];
                 $disciplina = $_SESSION["nomedisciplina"];
                 $codturma   = codturma($con, $_SESSION["turma"][3], $_SESSION["turma"][0].$_SESSION["turma"][1]);
-                $query = "SELECT nome FROM disciplina WHERE codprof = $codprof";
+                $ano        = $_SESSION["turma"][0].$_SESSION["turma"][1];
+                $query = "SELECT nome FROM disciplina WHERE codprof = '$codprof' AND ano = '$ano'";
                 $result = mysqli_query($con, $query);
                 printf("<option selected disabled hidden> %s </option>", $disciplina); 
                 while ($row = mysqli_fetch_row($result))
@@ -148,13 +156,13 @@
             printf("
             <form method='post'>
                 <fieldset class='fieldsum'>
-                <legend> %s - %s - Lição %d - Data: %s </legend>
+                <legend> %s - %s - Introduzir lição %d </legend>
                     <textarea name='sumario_' value='' cols='50' rows='10' style='height:100%%;width:100%%'></textarea> <br><br> 
                     <input class='buta' name='novo_sumario_post' type='submit' value='Introduzir novo sumário'>
                     <input class='buta' type='reset' value='Apagar'>
                 </fieldset>
             </form>
-            ", $_SESSION["turma"], $_SESSION["nomedisciplina"], $licao, "oi", "test");
+            ", $_SESSION["turma"], $_SESSION["nomedisciplina"], $licao);
         } else {
             // licoes antigas, mostrar sumario numa fieldset + inputbox disabled
             $query = "SELECT sumario, hora, diasemana FROM sumarios WHERE codprof = $codprof AND codturma = $codturma 

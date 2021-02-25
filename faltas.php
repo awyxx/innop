@@ -21,8 +21,13 @@
 <body> 
 
     <?php include "navbar.php";
-    
+    session_start();
+    if (!isset($_SESSION["codprof"])) { 
+        header("Location: login/formlogin.php"); 
+        exit; 
+    }
     ?>
+    
 
     <?php 
 
@@ -44,7 +49,7 @@
             <select style='font-size:130%%;background-color:#17b;color:white' name='turma' onchange='this.form.submit()'>");
                 //$codprof = $_SESSION["codprof"];
                 $g_turma = $_SESSION["turma"];
-                $query = "SELECT ano, sigla FROM turmas";
+                $query = "SELECT ano, sigla FROM turmas"; 
                 $result = mysqli_query($con, $query);
                 printf("<option selected disabled hidden> %s </option>", $g_turma); 
                 while ($row = mysqli_fetch_row($result))
@@ -60,7 +65,8 @@
                 $codprof    = $_SESSION["codprof"];
                 $disciplina = $_SESSION["nomedisciplina"];
                 $codturma   = codturma($con, $_SESSION["turma"][3], $_SESSION["turma"][0].$_SESSION["turma"][1]);
-                $query = "SELECT nome FROM disciplina WHERE codprof = $codprof";
+                $ano        = $_SESSION["turma"][0].$_SESSION["turma"][1];
+                $query = "SELECT nome FROM disciplina WHERE codprof = '$codprof' AND ano = '$ano'";
                 $result = mysqli_query($con, $query);
                 printf("<option selected disabled hidden> %s </option>", $disciplina); 
                 while ($row = mysqli_fetch_row($result))
@@ -196,7 +202,7 @@
 
             }
             printf("</table>");
-            printf(" <center>  <input style='margin-top:1%%;margin-bottom: 10%%;width: 35%%;color:white;background-color:#17b;font-size:130%%' name='nova_falta' type='submit' value='Marcar Faltas'>  </center> ");
+            printf(" <center>  <input style='margin-top:1%%;margin-bottom: 10%%;width: 35%%;color:white;background-color:#17b;font-size:130%%' name='nova_falta' type='submit' value='Marcar falta(s)'>  </center> ");
             printf("</form>");
     }
     else if (isset($_POST["nova_falta"]))

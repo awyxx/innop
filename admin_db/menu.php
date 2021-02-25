@@ -352,44 +352,46 @@ if (isset($_POST["concluido_post"])) {
                     printf("</center>");
                 }
             }
-        }
-        // e agora? como fazemos para as outras? xd
+        } else {
+            // fazer o update (optimizar??? how)
+            if ($tabela == "aluno")
+                $query_campos =  "`codaluno`=$dados[0],`codee`=$dados[1],`nome`='$dados[2]',`cc`=$dados[3],`datanasc`='$dados[4]',`nacionalidade`='$dados[5]',`morada`='$dados[6]',`telemovel`=$dados[7],`email`='$dados[8]'";
+            else if ($tabela == "cartao")
+                $query_campos = "`codcartao`=$dados[0],`status`='$dados[1]',`saldo`=$dados[2]"; 
+            else if ($tabela == "disciplina")
+                $query_campos = "`coddisciplina`=$dados[0],`nome`='$dados[1]',`ano`=$dados[2],`codprof`='$dados[3]'";
+            else if ($tabela == "dt")
+                $query_campos = "`coddt`=$dados[0],`codprof`=$dados[1]";
+            else if ($tabela == "ee")
+                $query_campos = "`codee`=$dados[0],`nome`='$dados[1]',`parentesco`='$dados[2]',`morada`='$dados[3]',`telemovel`=$dados[4],`email`='$dados[5]'" ;
+            else if ($tabela == "faltas")
+                $query_campos = "`codfalta`=$dados[0],`codaluno`=$dados[1],`datafalta`='$dados[2],`diasemana`='$dados[3]',`idxhora`=$dados[4],`coddisciplina`=$dados[5],`tipofalta`='$dados[6]";
+            else if ($tabela == "horarios")
+                $query_campos = "`codhorario`=$dados[0],`hora`=$dados[1],`seg`='$dados[2]',`ter`='$dados[3]',`qua`='$dados[4]',`qui`='$dados[5]',`sex`='$dados[6]'";
+            else if ($tabela == "notas")
+                $query_campos = "`codaluno`=$dados[0],`coddisciplina`=$dados[1],`nota`=$dados[2],`periodo`=$dados[3],`anoescolar`=$dados[4]";
+            else if ($tabela == "professor")
+                $query_campos = "`codprof`=$dados[0],`nome`='$dados[1]',`cc`=$dados[2],`datanasc`='$dados[3]',`nacionalidade`='$dados[4]',`telemovel`=$dados[5],`email`='$dados[6]'";
+            else if ($tabela == "sumarios")
+                $query_campos = "`codprof`=$dados[0],`codturma`=$dados[1],`licao`=$dados[2],`sumario`='$dados[3]',`hora`=$dados[4],`diasemana`='$dados[5]',`coddisciplina`=$dados[6]";
+            else if ($tabela == "turma")
+                $query_campos = "`codaluno`=$dados[0],`codhorario`=$dados[1],`codturma`=$dados[2],`numaluno`=$dados[3],`cartaluno`=$dados[4]";
+            else if ($tabela == "turmas")
+                $query_campos = "`codturma`=$dados[0],`sigla`='$dados[1]',`ano`=$dados[2],`curso`='$dados[3]',`coddt`=$dados[4]";
 
-        /*
-        // fazer o update (optimizar??? how)
-        if ($tabela == "aluno")
-            $query_campos =  "`codaluno`=$dados[0],`codee`=$dados[1],`nome`='$dados[2]',`cc`=$dados[3],`datanasc`='$dados[4]',`nacionalidade`='$dados[5]',`morada`='$dados[6]',`telemovel`=$dados[7],`email`='$dados[8]'";
-        else if ($tabela == "cartao")
-            $query_campos = "`codcartao`=$dados[0],`status`='$dados[1]',`saldo`=$dados[2]"; 
-        else if ($tabela == "disciplina")
-            $query_campos = "`coddisciplina`=$dados[0],`nome`='$dados[1]',`ano`=$dados[2],`codprof`='$dados[3]'";
-        else if ($tabela == "dt")
-            $query_campos = "`coddt`=$dados[0],`codprof`=$dados[1]";
-        else if ($tabela == "ee")
-            $query_campos = "`codee`=$dados[0],`nome`='$dados[1]',`parentesco`='$dados[2]',`morada`='$dados[3]',`telemovel`=$dados[4],`email`='$dados[5]'" ;
-        else if ($tabela == "faltas")
-            $query_campos = "`codfalta`=$dados[0],`codaluno`=$dados[1],`datafalta`='$dados[2],`diasemana`='$dados[3]',`idxhora`=$dados[4],`coddisciplina`=$dados[5],`tipofalta`='$dados[6]";
-        else if ($tabela == "horarios")
-            $query_campos = "`codhorario`=$dados[0],`hora`=$dados[1],`seg`='$dados[2]',`ter`='$dados[3]',`qua`='$dados[4]',`qui`='$dados[5]',`sex`='$dados[6]'";
-        else if ($tabela == "notas")
-            $query_campos = "`codaluno`=$dados[0],`coddisciplina`=$dados[1],`nota`=$dados[2],`periodo`=$dados[3],`anoescolar`=$dados[4]";
-        else if ($tabela == "professor")
-            $query_campos = "`codprof`=$dados[0],`nome`='$dados[1]',`cc`=$dados[2],`datanasc`='$dados[3]',`nacionalidade`='$dados[4]',`telemovel`=$dados[5],`email`='$dados[6]'";
-        else if ($tabela == "sumarios")
-            $query_campos = "`codprof`=$dados[0],`codturma`=$dados[1],`licao`=$dados[2],`sumario`='$dados[3]',`hora`=$dados[4],`diasemana`='$dados[5]',`coddisciplina`=$dados[6]";
-        else if ($tabela == "turma")
-            $query_campos = "`codaluno`=$dados[0],`codhorario`=$dados[1],`codturma`=$dados[2],`numaluno`=$dados[3],`cartaluno`=$dados[4]";
-        else if ($tabela == "turmas")
-            $query_campos = "`codturma`=$dados[0],`sigla`='$dados[1]',`ano`=$dados[2],`curso`='$dados[3]',`coddt`=$dados[4]";
-
-        $query = "UPDATE $tabela SET $query_campos WHERE $campo = $cod ;";
-        //$query = "REPLACE INTO $tabela SET $query_campos"; 
-        $result = mysqli_query($con, $query);
-        if (!$result)   printf("%s", mysqli_error($con));
-        else {
-            printf("<h2> Registo modificado com sucesso! </h2>");
+            $query = "UPDATE $tabela SET $query_campos WHERE $campo = $cod ;";
+            //$query = "REPLACE INTO $tabela SET $query_campos"; 
+            $result = mysqli_query($con, $query);
+            if (!$result) {
+                printf("<center> <h1> ERRO MYSQL: %s </h1> </center>", mysqli_error($con));
+            }
+            else {
+                printf("<center>");
+                printf("<h1> Registo Modificado com sucesso! </h1>");
+                printf("<img src='../imagens/ss.png' height='30%%'>");
+                printf("</center>");
+            }
         }
-    */
     }
     printf("<center>");
     printf("<a href='menu.php'> <button class='button' type='button'> Voltar </button> </a>");
