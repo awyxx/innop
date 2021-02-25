@@ -6,7 +6,7 @@ head, body {
 }
 
 .uperleft{
-    width: 70%;
+    width: 85%;
     height: 60%;
     background-color: white;
     text-align: justify;
@@ -15,7 +15,7 @@ head, body {
 }
 .fieldsum{
     height: 40%;
-    width: 95%;
+    width: 115%;
     background-color: white;
     margin-left: 2%;
 }
@@ -33,4 +33,19 @@ head, body {
   color: white;
   background-color: lightskyblue;
   font-size: 130%;
+}
+
+.tablefaltas{
+  background-color: #17b;
+  border: 1px solid #17b;
+  width: 100%;
+  text-align:center;
+}
+.tablefaltas td{
+  border: 1px solid #17b;
+  background-color: white;
+}
+.tablefaltas th{
+  background-color: white;
+  border: 1px solid #17b;
 }

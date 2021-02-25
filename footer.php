@@ -29,13 +29,13 @@
     <div class="links">
 
     <div class="link">
-    <a href="contactos"> Contactos </a> <br>    
+    <a href="index.php"> Página Inicial </a> <br>    
     </div>
     <div class="link">
-    <a href="contactos"> Suporte </a> <br>    
+    <a href="sumarios.php"> Sumários </a> <br>    
     </div>
     <div class="link">
-    <a href="contactos"> STUFFFFFFFF     </a> <br>    
+    <a href="faltas.php"> Faltas </a> <br>    
     </div>
     
     </div>

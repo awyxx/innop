@@ -259,6 +259,9 @@ include("../connect_db.php");
 // form + select menu com as tabelas!
 printf("<center>");                                                             // tag center
 printf("<br>");
+printf('<a style="margin-bottom:20%%" href="../logout.php"><img src="../imagens/logout.png" width="3%%" height="5%%" legend="Encerrar Sessão"></a>');
+printf("<br>");
+printf("<br>");
 printf("<form class='form_css' method='post'>");
     printf("<select class='select_css' name='tabela' onchange='this.form.submit()'>");
         $query  = "SHOW TABLES FROM innoplus";
@@ -344,7 +347,7 @@ if (isset($_POST["concluido_post"])) {
                 // inserir dados
                 if (inserir_dados($con, $tabela, $dados)) {
                     printf("<center>");
-                    printf("<h1> Registo introduzido com sucesso! </h1>");
+                    printf("<h1> Registo Modificado com sucesso! </h1>");
                     printf("<img src='../imagens/ss.png' height='30%%'>");
                     printf("</center>");
                 }

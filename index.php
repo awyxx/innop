@@ -93,8 +93,9 @@ if (!isset($_SESSION["codprof"])) {
                 "<td class='hora'>16:10<br>17:00</td>",
                 "<td class='hora'>17:05<br>17:55</td>"
             );
-
-            $query = "SELECT * FROM horarios ORDER BY hora ASC"; /* temos q adicionar codprof ao horario? ou codhorario a codprof? */
+            $codprof = $_SESSION['codprof'];
+            $horario = $_SESSION['codhorario'];
+            $query = "SELECT * FROM horarios inner join professor on horarios.codhorario = professor.codhorario where professor.codhorario = " . $horario . " and professor.codprof = " . $codprof . " ORDER BY hora ASC"; /* temos q adicionar codprof ao horario? ou codhorario a codprof? */
             $result = mysqli_query($con, $query);
             if (!$result)   printf("Erro: %s", mysqli_error($con));
             else {
@@ -137,21 +138,6 @@ if (!isset($_SESSION["codprof"])) {
                 teste
             </div>
         </div>
-        <div class="informacao">
-        <div class="tab">
-                Horário
-        </div>
-            <div class="desc">
-                teste
-            </div>
-        </div>
-        <div class="esqbdireito">
-        <div class="tab">
-                teste
-            </div>
-            <div class="desc">
-                teste
-            </div>
         </div>
         </div>
         

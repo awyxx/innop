@@ -53,7 +53,7 @@ function guardar_dados_sessao($result) {
     $_SESSION["status"]         = $row["status"];
     $_SESSION["saldo"]          = $row["saldo"];
     $_SESSION["img"]            = $row["img"];
-
+    $_SESSION["codhorario"]     = $row["codhorario"];
 }
 
 
@@ -102,7 +102,10 @@ mysqli_free_result($result);
     NAO ESQUECER QUE, SE O STATUS DO CLIENT FOR ADMIN TEMOS Q LHE REDIRECIONAR PARA OUTRA PAGINA E NAO PARA index.php... index.php é para os stores!
     ADMINS VAO PARA ../admin_db/menu.php
 */
-header("Location: ../index.php");
+if ($_SESSION["status"] == "Admin")
+header("Location: ../admin_db/menu.php");
+else
+    header("Location: ../index.php");
 exit;
 
 ?> 

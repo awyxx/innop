@@ -36,14 +36,14 @@
     function select_turma($con) {
         printf("Turma: 
         <form method='post'>
-            <select name='turma' onchange='this.form.submit()'>");
+            <select style='font-size:130%%;background-color:#17b;color:white' name='turma' onchange='this.form.submit()'>");
                 //$codprof = $_SESSION["codprof"];
                 $g_turma = $_SESSION["turma"];
                 $query = "SELECT ano, sigla FROM turmas";
                 $result = mysqli_query($con, $query);
                 printf("<option selected disabled hidden> %s </option>", $g_turma); 
                 while ($row = mysqli_fetch_row($result))
-                    printf("<option> %s %s </option>", $row[0], $row[1]);
+                    printf("<option style='background-color: rgb(65,180,255)'> %s %s </option>", $row[0], $row[1]);
         printf("</select> </form>");
     }
 
@@ -51,7 +51,7 @@
     function select_disciplinas($con) {
         printf("Disciplina: 
         <form method='post'>
-            <select name='disciplina' onchange='this.form.submit()'>");
+            <select style='font-size:130%%;background-color:#17b;color:white' name='disciplina' onchange='this.form.submit()'>");
                 $codprof    = $_SESSION["codprof"];
                 $disciplina = $_SESSION["nomedisciplina"];
                 $codturma   = codturma($con, $_SESSION["turma"][3], $_SESSION["turma"][0].$_SESSION["turma"][1]);
@@ -59,15 +59,15 @@
                 $result = mysqli_query($con, $query);
                 printf("<option selected disabled hidden> %s </option>", $disciplina); 
                 while ($row = mysqli_fetch_row($result))
-                    printf("<option> %s </option>", $row[0]);
+                    printf("<option style='background-color: rgb(65,180,255)'> %s </option>", $row[0]);
         printf("</select> </form>");
     }
 
     // menu dropdown com os sumarios/licoes do stor
     function select_licoes($con) {
         printf("Lição:
-        <form style='background-color:lightblue' id='formtest' method='post'>
-            <select name='licao' onchange='this.form.submit()'>");
+        <form  id='formtest' method='post'>
+            <select style='font-size:130%%;background-color:#17b;color:white' name='licao' onchange='this.form.submit()'>");
                 $codprof        = $_SESSION["codprof"];
                 $disciplina     = $_SESSION["nomedisciplina"];
                 $licao          = $_SESSION["licao"];
@@ -77,12 +77,12 @@
                 $result = mysqli_query($con, $query);
                 printf("<option selected disabled hidden> %s </option>", $licao);
                 while ($row = mysqli_fetch_row($result))
-                    printf("<option> %s </option>", $row[0]);
+                    printf("<option style='background-color: rgb(65,180,255)'> %s </option>", $row[0]);
                 //adicionar option com a licao atual pa ser introduzida
                 $query = "SELECT MAX(licao) FROM sumarios WHERE codprof = $codprof AND coddisciplina = $coddisciplina;";
                 $result = mysqli_query($con, $query);
                 $row = mysqli_fetch_row($result);
-                printf("<option> %d </option>", intval($row[0],10)+1);
+                printf("<option style='background-color: rgb(65,180,255)'> %d </option>", intval($row[0],10)+1);
         printf("</select> </form>");
     }
     // da return ao cod disciplina
@@ -147,7 +147,7 @@
             // ir buscar data de hoje php
             printf("
             <form method='post'>
-                <fieldset class=fieldsum>
+                <fieldset class='fieldsum'>
                 <legend> %s - %s - Lição %d - Data: %s </legend>
                     <textarea name='sumario_' value='' cols='50' rows='10' style='height:100%%;width:100%%'></textarea> <br><br> 
                     <input class='buta' name='novo_sumario_post' type='submit' value='Introduzir novo sumário'>
@@ -166,9 +166,9 @@
 
             // mostrar input box com o sumario e a sua data
             printf("
-            <fieldset>
+            <fieldset class='fieldsum'>
             <legend> %s - %s - Lição %d - Data: %s </legend>
-            <input disabled type='text' id='sumario_' name='sumario_' value='%s'>  <br><br> 
+            <textarea disabled type='text' id='sumario_' name='sumario_' cols='50' rows='10' style='height:100%%;width:100%%' > %s </textarea>  <br><br> 
             </fieldset>
             ", $_SESSION["turma"], $_SESSION["nomedisciplina"], $licao, $row["diasemana"], $row["sumario"]);
         }
