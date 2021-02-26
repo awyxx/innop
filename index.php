@@ -148,7 +148,7 @@ if (!isset($_SESSION["codprof"])) {
                 ?>
             </div>
 
-            <div class="infocontainer">
+            <div class="infocontainer_sumario">
                 <?php
                     function get_disciplina($con, $cod) {
                         $query = "SELECT nome FROM disciplina WHERE coddisciplina = $cod";
@@ -166,7 +166,7 @@ if (!isset($_SESSION["codprof"])) {
                     if (!$result_sum)   printf("Erro: %s", mysqli_error($con));
                     else {
                         $row = mysqli_fetch_row($result_sum);
-                        printf("&emsp; <b> Ultimo sumário:  </b> [%s] - Lição %s - %s", get_disciplina($con, $row[0]), $row[1], $row[2]);
+                        printf("&emsp; <p> <b> Ultimo sumário:  </b> [%s] - Lição %s - %s </p>", get_disciplina($con, $row[0]), $row[1], $row[2]);
                     }
                 ?>
             </div>

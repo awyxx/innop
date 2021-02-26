@@ -279,6 +279,18 @@ head, body {
   border-radius: 10%;
   font-size: 1vw;
 }
+.infocontainer_sumario{ /* informacoes */
+  width: 90%;
+  height: 42%;
+  background-color: rgb(226, 226, 226);
+  float: left;
+  margin-top: 4%;
+  margin-left: 5%;
+  line-height: 250%; /* 65px */
+  border-radius: 10%;
+  font-size: 1vw;
+  text-align: center;
+}
 .tit{ /* dia da semana */
   background-color: rgb(32, 124, 178);
   color: white;

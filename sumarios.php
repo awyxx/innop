@@ -206,7 +206,7 @@
         $query = "INSERT INTO `sumarios`(`codprof`, `codturma`, `licao`, `sumario`, `hora`, `diasemana`, `coddisciplina`) 
                         VALUES ($codprof,$codturma,$licao,'$sumario','$hora','$dia',$coddisciplina)";
     
-        printf("queryzona: %s", $query);
+        //printf("queryzona: %s", $query);
 
 
         

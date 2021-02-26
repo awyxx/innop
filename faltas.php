@@ -212,8 +212,8 @@
         foreach ( $_POST["ck"] as $valores)
         {
             $querie = "INSERT INTO faltas(`codfalta`, `codaluno`, `datafalta`, `diasemana`, `idxhora`, `coddisciplina`, `tipofalta`) VALUES (NULL, '$valores' , CURRENT_DATE() , DAYOFWEEK(CURRENT_DATE()), CURRENT_TIME(),'$coddisci' ,'Presença')";
-            printf("<br>".$valores."<br>");
-            printf("Query on the bankzzzz :  %s",$querie);
+            //printf("<br>".$valores."<br>");
+           // printf("Query on the bankzzzz :  %s",$querie);
             $result = mysqli_query($con, $querie);
             if(!$result)    
             printf("<br> Erro estranho, falta nao introduzida: %s", mysqli_error($con));
